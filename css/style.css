@@ -1,0 +1,31 @@
+.shareTooltip {
+    position: relative;
+    display: inline-block;
+}
+  
+.shareTooltip .tooltiptext {
+    visibility: hidden;
+    width: 100px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 1;
+    top: -3px;
+    right: 110%;
+}
+
+.shareTooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent transparent black;
+}
+.shareTooltip:hover .tooltiptext {
+    visibility: visible;
+}

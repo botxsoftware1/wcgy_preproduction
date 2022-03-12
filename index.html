@@ -6,12 +6,23 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  
   <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.2/tailwind.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/daisyui@1.24.3/dist/full.css" rel="stylesheet" type="text/css" />
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2/dist/tailwind.min.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+  <link rel="stylesheet" href="css/style.css">
 
+  <script src="https://cdn.jsdelivr.net/gh/tanaikech/HtmlFormObjectParserForGoogleAppsScript_js/htmlFormObjectParserForGoogleAppsScript_js.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+  <script src="https://unpkg.com/@popperjs/core@2.9.1/dist/umd/popper.min.js" charset="utf-8"></script>
+  <script src="https://unpkg.com/@themesberg/flowbite@1.3.0/dist/flowbite.bundle.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
   <script src="js/navbar.js"></script>
 
   <title>Home</title>
@@ -69,12 +80,12 @@
   <!-- END FEATURED JOBS TITLE -->
 
 
-  <!-- FILTER AND SEARCH -->
+  <!-- FILTER AND SEARCH CONTROLS -->
   <div class="sm:items-center sm:flex sm:justify-between mx-16">
     <div class="relative space-x-1 sm:justify-end sm:order-last">
       <div class="xl:w-60">
         <div class="input-group relative flex items-stretch w-full rounded">
-          <input type="search" class="form-control relative flex-auto min-w-0 block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" placeholder="Search" aria-label="Search" aria-describedby="button-addon2">
+          <input id="searchBox" type="search" class="form-control relative flex-auto min-w-0 block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" placeholder="Search" aria-label="Search" aria-describedby="button-addon2">
           <span class="input-group-text flex items-center px-3 py-1.5 text-base font-normal text-gray-700 text-center whitespace-nowrap rounded" id="basic-addon2">
             <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="w-4" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
               <path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"></path>
@@ -89,46 +100,189 @@
         <label for="FilterBy" class="sr-only">
           Filter
         </label>
-
-        <select id="FilterBy" name="filter_by" class="text-sm border-gray-100 rounded">
-          <option readonly>Filter</option>
-          <option value="health">Health</option>
-          <option value="fitness">Fitness</option>
-          <option value="eating">Eating</option>
+        
+        <select id="FilterBy" name="filter_by" class="text-sm w-36 border-blue-600 rounded">
+          <option readonly>Filter by Category</option>
+          <option>Internship</option>
+          <option>Part Time</option>
+          <option>Full Time</option>
         </select>
       </div>
 
-      <div class="ml-4"> <label for="SortBy" class="sr-only">
+      <div class="ml-4"> 
+        <label for="SortBy" class="sr-only">
           Sort
         </label>
 
         <select id="SortBy" name="sort_by" class="text-sm border-gray-100 rounded">
-          <option readonly>Sort</option>
-          <option value="title-asc">Title, A-Z</option>
-          <option value="title-desc">Title, Z-A</option>
-          <option value="price-asc">Price, Low-High</option>
-          <option value="price-desc">Price, High-Low</option>
+          <option readonly>Filter by Type</option>
+          <option>Remote</option>
+          <option>Office</option>
         </select>
       </div>
     </form>
   </div>
-  <!-- END FILTER AND SEARCH -->
+  <!-- END FILTER AND SEARCH CONTROLS -->
 
 
   <!-- JOB CARDS -->
-  <div class="grid grid-flow-row-dense grid-cols-3" id="jobcard"></div>
-  <br>
-  <div class="flex justify-center">
-    <button id="btn-prev">&elsdot; Previous</button>
-    <button id="btn-next">Next &egsdot;</button>
-  </div>
-  <p class="flex justify-center">Page<span id="page"></span></p>
+  <div class="grid grid-flow-row-dense grid-cols-3  sm\:grid-cols-1" id="jobcard"></div>
   <!-- END JOB CARDS -->
 
+  <br>
+
+  <!-- PAGINATION CONTROLS -->
+  <div id="paginationControl">
+    <div class="flex justify-center">
+      <button id="btn-prev">&elsdot; Previous</button>
+      <button id="btn-next">Next &egsdot;</button>
+    </div>
+    <p class="flex justify-center">Page<span id="page"></span></p>
+  </div>
+  <!-- END PAGINATION CONTROLS -->
 
 
 
 
+
+
+
+<!--------------------- SCRIPTS ---------------------------->
+
+<!-- FORM ONSUBMIT CLICK -->
+<script>
+  $(document).on("click", '#contact-submit', function() 
+  {   
+    var nameValidation = $(this).closest('form').find('[id=Name]').val();
+    var emailValidation = $(this).closest('form').find('[id=Email]').val();
+    var phoneValidation = $(this).closest('form').find('[id=Phone]').val();
+    var resumeValidation = $(this).closest('form').find('[id=sampleFiles]').val();
+
+    if(resumeValidation !='' && nameValidation != '' && emailValidation != '' && phoneValidation!= '') {   
+      const fsize = $(this).closest('form').find('[id=sampleFiles]')[0].files[0].size;
+      const file = Math.round((fsize / 1024));
+
+      if (file >= 4096) {
+        console.log("greater than 4mb");
+        // document.getElementById('toastDiv2').innerHTML=`
+        // <div id="toast-warning" class="flex items-center w-full max-w-xs p-4 text-gray-500 bg-red rounded-lg shadow dark:text-gray-400 dark:bg-gray-800" role="alert">
+        //   <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-orange-500 bg-orange-100 rounded-lg dark:bg-orange-700 dark:text-orange-200">
+        //       <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
+        //   </div>
+        //   <div class="ml-3 text-sm font-normal">Improve password difficulty.</div>
+        //   <button type="button" class="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700" data-collapse-toggle="toast-warning" aria-label="Close">
+        //       <span class="sr-only">Close</span>
+        //       <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+        //   </button>
+        // </div>`
+      } 
+      // else if (file < 2048) {
+        // console.log("less than 2mb");
+        // document.getElementById('toastDiv1').innerHTML=`
+        // <div id="toast-warning" class="flex items-center w-full max-w-xs p-4 text-gray-500 bg-red rounded-lg shadow dark:text-gray-400 dark:bg-gray-800" role="alert">
+        //   <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-orange-500 bg-orange-100 rounded-lg dark:bg-orange-700 dark:text-orange-200">
+        //       <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
+        //   </div>
+        //   <div class="ml-3 text-sm font-normal">Improve password difficulty.</div>
+        //   <button type="button" class="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700" data-collapse-toggle="toast-warning" aria-label="Close">
+        //       <span class="sr-only">Close</span>
+        //       <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+        //   </button>
+        // </div>`
+      // }
+      else {
+          alert("File Size : "+file);
+          run(this)
+          postToGoogle(this);
+          $(this).closest('div').find("label")[0].control.checked = false;
+          return false;
+      }
+    } 
+    else {
+      Swal.fire(
+        'Incomplete Form!',
+        'Please fill the form completely and try again!',
+        'error'
+      )
+      return false; 
+    }
+  }); 
+</script> 
+
+<!-- FILE UPLOAD -->
+<script>
+  async function run(e) {
+    var resumeFilename = $(e).closest('form').find('[id=Name]').val()+"_"+$(e).closest('form').find('[id=JobId]').val();
+    var jobIdparam = $(e).closest('form').find('[id=JobId]').val();
+    const url = "https://script.google.com/macros/s/AKfycbzRWf2GX_Dt0ZksYRcBYhJfKKMKcUwp51K35kgFdTqByAzpLqkCQyT5Nf06rgkzsYiSYw/exec";
+    const obj = await ParseFormObjectForGAS(e.parentNode, null, null, true);
+    obj.sampleFiles[0].files[0].filename = resumeFilename
+    fetch(url, { method: "POST", body: JSON.stringify({ 'a': obj, 'b': jobIdparam}) })
+        .then((res) => res.json())
+        .then((res) =>
+          Toastify({
+              text: "Hello "+res.applicantNameToast+  ",  Your Applicant ID is " + res.applicantJobRefId,
+              duration: -1,
+              destination: `index.html?id=${res.applicantJobRefId}`,
+              newWindow: true,
+              close: true,
+              gravity: "bottom", // `top` or `bottom`
+              position: "right", // `left`, `center` or `right`
+              stopOnFocus: true, // Prevents dismissing of toast on hover
+              style: {
+                  background: "linear-gradient(to right, #00b09b, #96c93d)",
+              },
+              offset: {
+                  x: 50, // horizontal axis - can be a number or a string indicating unity. eg: '2em'
+                  y: 20 // vertical axis - can be a number or a string indicating unity. eg: '2em'
+              },
+          }).showToast());
+  }
+</script>
+
+<!-- POST TO GOOGLE -->
+<script>
+  function postToGoogle(e) {
+      var field1 = $(e).closest('form').find('[id=Name]').val();
+      var field2 = $(e).closest('form').find('[id=Email]').val();
+      var field3 = $(e).closest('form').find('[id=JobId]').val();
+      var field4 = $(e).closest('form').find('[id=Phone]').val();
+
+      $.ajax({
+          url: "https://docs.google.com/forms/u/3/d/e/1FAIpQLSfzYmaJ6VC0MlGZF5mas6UFgJFbrCqh01c8gstmEAQhrif7Qw/formResponse",
+
+          //add your google form generated numbers below which are also the 'names' of your inputs     
+          data: {
+              "entry.467876062": field1,
+              "entry.362738034": field2,
+              "entry.284597317": field3,
+              "entry.961587284": field4,
+          },
+          type: "POST",
+          dataType: "xml",
+          success: function (d) {
+            $(e).closest('div').find('[id=contact]').trigger('reset');
+          },
+          error: function (x, y, z) {
+            Swal.fire({
+              icon:'success',
+              title: 'Applied Successfully!',
+              text: 'You will receive a confirmation mail along with a Unique Reference Id after our system reviews your application.',
+              confirmButtonText: 'OK',
+            })
+            $(e).closest('div').find('[id=contact]').trigger('reset');
+          }
+      });
+      return false;
+  }
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
   <script src="js/main.js"></script>
 
   <br><br><br><br><br><br>
