@@ -71,7 +71,7 @@ function jsp_change_page(page, jsp_json_object = jobsData) {
 										<g id="Share" transform="translate(40.000000, 379.000000)">
 											<path d="M8,72 L64,72 C68.418278,72 72,68.418278 72,64 L72,8 C72,3.581722 68.418278,-8.11624501e-16 64,0 L8,0 C3.581722,8.11624501e-16 -5.41083001e-16,3.581722 0,8 L0,64 C5.41083001e-16,68.418278 3.581722,72 8,72 Z" id="Rounded" fill="#FFFFFF"></path>
 											<path d="M21.855,43.51 C23.681,43.51 25.363,42.885 26.697,41.838 L41.603,49.197 C41.603,49.227 41.601,49.254 41.601,49.283 C41.601,53.621 45.119,57.139 49.457,57.139 C53.794,57.139 57.312,53.621 57.312,49.283 C57.312,44.946 53.794,41.428 49.457,41.428 C47.148,41.428 45.074,42.422 43.638,44.006 L29.582,37.067 C29.664,36.61 29.71,36.139 29.71,35.656 C29.71,35.559 29.707,35.463 29.703,35.367 L44.244,27.731 C45.632,28.961 47.457,29.711 49.457,29.711 C53.796,29.711 57.312,26.194 57.312,21.856 C57.312,17.516 53.794,14 49.457,14 C45.119,14 41.601,17.516 41.601,21.856 C41.601,22.18 41.625,22.498 41.662,22.811 L27.533,30.231 C26.103,28.735 24.089,27.801 21.855,27.801 C17.517,27.801 14,31.319 14,35.656 C14,39.994 17.517,43.51 21.855,43.51" fill="#2A5A5A"></path>
-										</g>
+										</g>	
 									</g>
 								</g>
 							</svg>
@@ -125,23 +125,23 @@ function jsp_change_page(page, jsp_json_object = jobsData) {
 
 
 										<!-- JOB INFO BUTTON -->
-								<div x-data="{ tooltip: false }" class="relative z-30 inline-flex">
-									<div x-on:mouseover="tooltip = true" x-on:mouseleave="tooltip = false">
-										<label for="job-info${jsp_json_object[i].jobId}" class="z-40" style=" line-height: 30px; width: 100%; display: inline-block;">
-												<svg style="display: inline-block; vertical-align: middle;" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-													<path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+										<div x-data="{ tooltip: false }" class="relative z-30 inline-flex">
+											<div x-on:mouseover="tooltip = true" x-on:mouseleave="tooltip = false">
+												<label for="job-info${jsp_json_object[i].jobId}" class="z-40" style=" line-height: 30px; width: 100%; display: inline-block;">
+														<svg style="display: inline-block; vertical-align: middle;" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+															<path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+														</svg>
+												</label>
+											</div>
+											<div class="relative" x-cloak x-show.transition.origin.top="tooltip">
+												<div class="absolute top-0 z-10 w-27 p-2 -mt-1 text-sm leading-tight text-white bg-black transform -translate-x-1/2 -translate-y-full rounded-lg shadow-lg">
+													Details
+												</div>
+												<svg class="absolute z-10 w-6 h-6 text-orange-500 transform -translate-x-6 -translate-y-3 fill-black stroke-black" width="8" height="8">
+													<rect x="12" y="-10" width="8" height="8" transform="rotate(45)" />
 												</svg>
-										</label>
-									</div>
-									<div class="relative" x-cloak x-show.transition.origin.top="tooltip">
-										<div class="absolute top-0 z-10 w-27 p-2 -mt-1 text-sm leading-tight text-white bg-black transform -translate-x-1/2 -translate-y-full rounded-lg shadow-lg">
-											Details
+											</div>
 										</div>
-										<svg class="absolute z-10 w-6 h-6 text-orange-500 transform -translate-x-6 -translate-y-3 fill-black stroke-black" width="8" height="8">
-											<rect x="12" y="-10" width="8" height="8" transform="rotate(45)" />
-										</svg>
-									</div>
-								</div>
 
 										<!-- END JOB INFO BUTTON -->
 
@@ -275,7 +275,7 @@ function setup() {
 
 
 
-// COPY TO CLIPBOARD
+// SHARE JOB / COPY TO CLIPBOARD
 function shareButton(e) {
   var copyText = $(e).find('[id=shareLink]');
   navigator.clipboard.writeText(copyText[0].innerHTML);
@@ -288,7 +288,7 @@ function afterClickShare(e) {
   var tooltip = $(e).find('[id=shareTooltip]');
   tooltip[0].innerHTML = "Copy Link";
 }
-// END COPY TO CLIPBOARD
+// END SHARE JOB / COPY TO CLIPBOARD
 
 
 
@@ -301,6 +301,7 @@ $(document).ready(function(){
 		}
 		else {
 			$('#paginationControl').css("visibility", "hidden");
+			$('#SortBy, #FilterBy').prop('selectedIndex',0);
 			var searchField = $(this).val();
 			var regex = new RegExp(searchField, "i");
 			const newArray = [];
@@ -310,7 +311,6 @@ $(document).ready(function(){
 				jsp_change_page(1,newArray);
 			}
 			});
-			console.log(newArray);
 		}
   });
 });
@@ -321,23 +321,34 @@ $(document).ready(function(){
 // FILTER
 $(document).ready(function(){
 	$('#FilterBy, #SortBy').change(function(){
-		if($('#FilterBy').val() != 'Filter by Category' || $('#SortBy').val() != 'Filter by Type'){
-			console.log("A")
-			const filteredArray = jobsData.filter(jobCategory);
-			function jobCategory(cat){
-				if (cat.kind == $('#FilterBy').val()){
-					return cat.kind;
-				}
-				else if(cat.type == $('#SortBy').val()){
-					return cat.type;
-				}
-				else if (cat.kind == $('#FilterBy').val() && cat.type == $('#SortBy').val()){
-					return cat.kind,cat.type;
-				}
-			}
+		var filteredArray = [];
+		jobType = $('#SortBy').val();
+		jobCategory = $('#FilterBy').val();
+		
+		if(jobCategory != 'Filter by Category' && jobType != 'Filter by Type') {
+			$('#paginationControl').css("visibility", "hidden");
+			filteredArray = jobsData.filter(job => {
+				return job.kind == jobCategory && job.type == jobType;
+			});
 			jsp_change_page(1,filteredArray);
 		}
+		else if(jobCategory != 'Filter by Category' || jobType != 'Filter by Type') {
+			$('#paginationControl').css("visibility", "hidden");
+			if(jobCategory != 'Filter by Category'){
+				filteredArray = jobsData.filter(job =>{
+					return job.kind == jobCategory;
+				});
+				jsp_change_page(1,filteredArray);
+			}
+			else{
+				filteredArray = jobsData.filter(job => {
+					return job.type == jobType;
+				});
+				jsp_change_page(1,filteredArray);
+			}
+		}
 		else {
+			$('#paginationControl').css("visibility", "visible");
 			jsp_change_page(1);
 		}
 	});
