@@ -75,20 +75,15 @@
           </div>
         </div>
         <div>
-          <form>
+          <form id="searchBar">
             <div class="border-2 border-gray-900 flex justify-between items-center rounded-lg bg-white w-full">
-                <svg  xmlns="http://www.w3.org/2000/svg"
-                      class="h-8 w-8 text-gray-400 mx-4"
-                      fill="none"
-                      viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                          d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-                </svg>
-                <input  class="focus:outline-none focus:ring-0 text-gray-900 bg-white placeholder-gray-400 w-full"
-                        placeholder="Search for any job"/>
-                <button class="bg-gray-900 text-white h-fit py-3 px-8" type="submit"/>
-                  Search
-                </button>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-gray-400 mx-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+              </svg>
+              <input id="searchField" class="focus:outline-none focus:ring-0 text-gray-900 bg-white placeholder-gray-400 w-full" placeholder="Search for any job"/>
+              <button class="bg-gray-900 text-white h-fit py-3 px-8" type="submit"/>
+                Search
+              </button>
             </div>
           </form>
         </div>
@@ -111,9 +106,9 @@
 
   <!-- PAGINATION CONTROLS -->
   <div>
-    <div class="flex justify-center">
-      <button class="prev-btn">Prev</button>
-      <button class="next-btn">Next</button>
+    <div class="flex justify-center mt-4">
+      <button class="prev-btn p-2">&elsdot; Prev</button>
+      <button class="next-btn p-2">Next &egsdot;</button>
     </div>
     <p class="flex justify-center">Page<span id="page"></span></p>
   </div>
