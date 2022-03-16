@@ -35,7 +35,7 @@ $(function(){
 	function fetchData(searchValue = "") {
 	  // ajax() method to make api calls
 	  $.ajax({
-		url: "https://script.google.com/macros/s/AKfycbzUa5AfMYFxPDsavRrkkUNtlxGGi9yBeOS3wX-dofEYi5-usMPKec462FImzqGK162F/exec",
+		url: "https://script.google.com/macros/s/AKfycbxJ2UtTgfDLozjeukG-IYZYltS2uitHSha-G4HxMQFumn4CEv0UZKypLI7sjVyBmyFx/exec",
 		type: "GET",
 		data: { 
 				page: page,
@@ -43,7 +43,7 @@ $(function(){
 				search: searchValue,
 		},
 		success: function(data) {
-		  // console.log(data);
+		//   console.log(data);
 
 		  if (data.user) {
 				var dataArr = data.user;
