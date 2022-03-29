@@ -1,0 +1,1740 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" x-init="$watch('darkMode', val => localStorage.setItem('dark', val))"
+  x-data="{darkMode: localStorage.dark === 'true' || (!('dark' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches), dialogPanels: []}"
+  :class="darkMode ? 'dark' : ''" lang='en'>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{EmployerName}</title>
+
+  <link id="heading-font" rel="stylesheet" type="text/css"
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800;900&display=swap" media="all" />
+  <link id="body-font" rel="stylesheet" type="text/css"
+    href="https://fonts.googleapis.com/css2?family=Dm+Sans:wght@300;400;500;600;700;800;900&display=swap" media="all" />
+
+  <style>
+    .modal {
+      transition: opacity 0.25s ease;
+    }
+
+    body.modal-active {
+      overflow-x: hidden;
+      overflow-y: visible !important;
+    }
+  </style>
+  <style>
+    *,
+    ::after,
+    ::before {
+      box-sizing: border-box;
+      border-width: 0;
+      border-style: solid;
+      border-color: currentColor
+    }
+
+    ::after,
+    ::before {
+      --tw-content: ''
+    }
+
+    html {
+      line-height: 1.5;
+      -webkit-text-size-adjust: 100%;
+      -moz-tab-size: 4;
+      -o-tab-size: 4;
+      tab-size: 4;
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"
+    }
+
+    body {
+      margin: 0;
+      line-height: inherit
+    }
+
+    hr {
+      height: 0;
+      color: inherit;
+      border-top-width: 1px
+    }
+
+    abbr[title] {
+      -webkit-text-decoration: underline dotted;
+      text-decoration: underline dotted
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-size: inherit;
+      font-weight: inherit
+    }
+
+    a {
+      color: inherit;
+      text-decoration: inherit
+    }
+
+    b,
+    strong {
+      font-weight: bolder
+    }
+
+    code,
+    kbd,
+    pre,
+    samp {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 1em
+    }
+
+    small {
+      font-size: 80%
+    }
+
+    sub,
+    sup {
+      font-size: 75%;
+      line-height: 0;
+      position: relative;
+      vertical-align: baseline
+    }
+
+    sub {
+      bottom: -.25em
+    }
+
+    sup {
+      top: -.5em
+    }
+
+    table {
+      text-indent: 0;
+      border-color: inherit;
+      border-collapse: collapse
+    }
+
+    button,
+    input,
+    optgroup,
+    select,
+    textarea {
+      font-family: inherit;
+      font-size: 100%;
+      line-height: inherit;
+      color: inherit;
+      margin: 0;
+      padding: 0
+    }
+
+    button,
+    select {
+      text-transform: none
+    }
+
+    [type=button],
+    [type=reset],
+    [type=submit],
+    button {
+      -webkit-appearance: button;
+      background-color: transparent;
+      background-image: none
+    }
+
+    :-moz-focusring {
+      outline: auto
+    }
+
+    :-moz-ui-invalid {
+      box-shadow: none
+    }
+
+    progress {
+      vertical-align: baseline
+    }
+
+    ::-webkit-inner-spin-button,
+    ::-webkit-outer-spin-button {
+      height: auto
+    }
+
+    [type=search] {
+      -webkit-appearance: textfield;
+      outline-offset: -2px
+    }
+
+    ::-webkit-search-decoration {
+      -webkit-appearance: none
+    }
+
+    ::-webkit-file-upload-button {
+      -webkit-appearance: button;
+      font: inherit
+    }
+
+    summary {
+      display: list-item
+    }
+
+    blockquote,
+    dd,
+    dl,
+    figure,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    hr,
+    p,
+    pre {
+      margin: 0
+    }
+
+    fieldset {
+      margin: 0;
+      padding: 0
+    }
+
+    legend {
+      padding: 0
+    }
+
+    menu,
+    ol,
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0
+    }
+
+    textarea {
+      resize: vertical
+    }
+
+    input::-moz-placeholder,
+    textarea::-moz-placeholder {
+      opacity: 1;
+      color: #9ca3af
+    }
+
+    input:-ms-input-placeholder,
+    textarea:-ms-input-placeholder {
+      opacity: 1;
+      color: #9ca3af
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      opacity: 1;
+      color: #9ca3af
+    }
+
+    [role=button],
+    button {
+      cursor: pointer
+    }
+
+    :disabled {
+      cursor: default
+    }
+
+    audio,
+    canvas,
+    embed,
+    iframe,
+    img,
+    object,
+    svg,
+    video {
+      display: block;
+      vertical-align: middle
+    }
+
+    img,
+    video {
+      max-width: 100%;
+      height: auto
+    }
+
+    [hidden] {
+      display: none
+    }
+
+    [multiple],
+    [type=date],
+    [type=datetime-local],
+    [type=email],
+    [type=month],
+    [type=number],
+    [type=password],
+    [type=search],
+    [type=tel],
+    [type=text],
+    [type=time],
+    [type=url],
+    [type=week],
+    select,
+    textarea {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      background-color: #fff;
+      border-color: #6b7280;
+      border-width: 1px;
+      border-radius: 0;
+      padding-top: .5rem;
+      padding-right: .75rem;
+      padding-bottom: .5rem;
+      padding-left: .75rem;
+      font-size: 1rem;
+      line-height: 1.5rem;
+      --tw-shadow: 0 0 #0000
+    }
+
+    [multiple]:focus,
+    [type=date]:focus,
+    [type=datetime-local]:focus,
+    [type=email]:focus,
+    [type=month]:focus,
+    [type=number]:focus,
+    [type=password]:focus,
+    [type=search]:focus,
+    [type=tel]:focus,
+    [type=text]:focus,
+    [type=time]:focus,
+    [type=url]:focus,
+    [type=week]:focus,
+    select:focus,
+    textarea:focus {
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+      --tw-ring-inset: var(--tw-empty, );
+      /*!*/
+      /*!*/
+      --tw-ring-offset-width: 0px;
+      --tw-ring-offset-color: #fff;
+      --tw-ring-color: #2563eb;
+      --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+      --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+      box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+      border-color: #2563eb
+    }
+
+    input::-moz-placeholder,
+    textarea::-moz-placeholder {
+      color: #6b7280;
+      opacity: 1
+    }
+
+    input:-ms-input-placeholder,
+    textarea:-ms-input-placeholder {
+      color: #6b7280;
+      opacity: 1
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: #6b7280;
+      opacity: 1
+    }
+
+    ::-webkit-datetime-edit-fields-wrapper {
+      padding: 0
+    }
+
+    ::-webkit-date-and-time-value {
+      min-height: 1.5em
+    }
+
+    select {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+      background-position: right .5rem center;
+      background-repeat: no-repeat;
+      background-size: 1.5em 1.5em;
+      padding-right: 2.5rem;
+      -webkit-print-color-adjust: exact;
+      color-adjust: exact
+    }
+
+    [multiple] {
+      background-image: initial;
+      background-position: initial;
+      background-repeat: unset;
+      background-size: initial;
+      padding-right: .75rem;
+      -webkit-print-color-adjust: unset;
+      color-adjust: unset
+    }
+
+    [type=checkbox],
+    [type=radio] {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      padding: 0;
+      -webkit-print-color-adjust: exact;
+      color-adjust: exact;
+      display: inline-block;
+      vertical-align: middle;
+      background-origin: border-box;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      flex-shrink: 0;
+      height: 1rem;
+      width: 1rem;
+      color: #2563eb;
+      background-color: #fff;
+      border-color: #6b7280;
+      border-width: 1px;
+      --tw-shadow: 0 0 #0000
+    }
+
+    [type=checkbox] {
+      border-radius: 0
+    }
+
+    [type=radio] {
+      border-radius: 100%
+    }
+
+    [type=checkbox]:focus,
+    [type=radio]:focus {
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+      --tw-ring-inset: var(--tw-empty, );
+      /*!*/
+      /*!*/
+      --tw-ring-offset-width: 2px;
+      --tw-ring-offset-color: #fff;
+      --tw-ring-color: #2563eb;
+      --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+      --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+      box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow)
+    }
+
+    [type=checkbox]:checked,
+    [type=radio]:checked {
+      border-color: transparent;
+      background-color: currentColor;
+      background-size: 100% 100%;
+      background-position: center;
+      background-repeat: no-repeat
+    }
+
+    [type=checkbox]:checked {
+      background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e")
+    }
+
+    [type=radio]:checked {
+      background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle cx='8' cy='8' r='3'/%3e%3c/svg%3e")
+    }
+
+    [type=checkbox]:checked:focus,
+    [type=checkbox]:checked:hover,
+    [type=radio]:checked:focus,
+    [type=radio]:checked:hover {
+      border-color: transparent;
+      background-color: currentColor
+    }
+
+    [type=checkbox]:indeterminate {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 16 16'%3e%3cpath stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M4 8h8'/%3e%3c/svg%3e");
+      border-color: transparent;
+      background-color: currentColor;
+      background-size: 100% 100%;
+      background-position: center;
+      background-repeat: no-repeat
+    }
+
+    [type=checkbox]:indeterminate:focus,
+    [type=checkbox]:indeterminate:hover {
+      border-color: transparent;
+      background-color: currentColor
+    }
+
+    [type=file] {
+      background: unset;
+      border-color: inherit;
+      border-width: 0;
+      border-radius: 0;
+      padding: 0;
+      font-size: unset;
+      line-height: inherit
+    }
+
+    [type=file]:focus {
+      outline: 1px auto -webkit-focus-ring-color
+    }
+
+    *,
+    ::after,
+    ::before {
+      --tw-translate-x: 0;
+      --tw-translate-y: 0;
+      --tw-rotate: 0;
+      --tw-skew-x: 0;
+      --tw-skew-y: 0;
+      --tw-scale-x: 1;
+      --tw-scale-y: 1;
+      --tw-transform: translateX(var(--tw-translate-x)) translateY(var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+      --tw-border-opacity: 1;
+      border-color: rgb(229 231 235 / var(--tw-border-opacity));
+      --tw-ring-offset-shadow: 0 0 #0000;
+      --tw-ring-shadow: 0 0 #0000;
+      --tw-shadow: 0 0 #0000;
+      --tw-shadow-colored: 0 0 #0000
+    }
+
+    .relative {
+      position: relative
+    }
+
+    .order-last {
+      order: 9999
+    }
+
+    .mx-auto {
+      margin-left: auto;
+      margin-right: auto
+    }
+
+    .mx-96 {
+      margin-left: 24rem;
+      margin-right: 24rem
+    }
+
+    .my-7 {
+      margin-top: 1.75rem;
+      margin-bottom: 1.75rem
+    }
+
+    .my-4 {
+      margin-top: 1rem;
+      margin-bottom: 1rem
+    }
+
+    .my-5 {
+      margin-top: 1.25rem;
+      margin-bottom: 1.25rem
+    }
+
+    .ml-2 {
+      margin-left: .5rem
+    }
+
+    .-mr-1 {
+      margin-right: -.25rem
+    }
+
+    .mt-3 {
+      margin-top: .75rem
+    }
+
+    .mt-6 {
+      margin-top: 1.5rem
+    }
+
+    .mt-2 {
+      margin-top: .5rem
+    }
+
+    .mb-8 {
+      margin-bottom: 2rem
+    }
+
+    .mb-3 {
+      margin-bottom: .75rem
+    }
+
+    .flex {
+      display: flex
+    }
+
+    .inline-flex {
+      display: inline-flex
+    }
+
+    .grid {
+      display: grid
+    }
+
+    .hidden {
+      display: none
+    }
+
+    .h-12 {
+      height: 3rem
+    }
+
+    .h-5 {
+      height: 1.25rem
+    }
+
+    .h-8 {
+      height: 2rem
+    }
+
+    .h-full {
+      height: 100%
+    }
+
+    .max-h-32 {
+      max-height: 8rem
+    }
+
+    .w-5 {
+      width: 1.25rem
+    }
+
+    .w-full {
+      width: 100%
+    }
+
+    .w-8 {
+      width: 2rem
+    }
+
+    .w-12 {
+      width: 3rem
+    }
+
+    .w-4\/5 {
+      width: 80%
+    }
+
+    .max-w-2xl {
+      max-width: 42rem
+    }
+
+    .max-w-7xl {
+      max-width: 80rem
+    }
+
+    .max-w-screen-xl {
+      max-width: 1280px
+    }
+
+    .max-w-md {
+      max-width: 28rem
+    }
+
+    .transform {
+      transform: var(--tw-transform)
+    }
+
+    .grid-cols-1 {
+      grid-template-columns: repeat(1, minmax(0, 1fr))
+    }
+
+    .flex-col {
+      flex-direction: column
+    }
+
+    .flex-col-reverse {
+      flex-direction: column-reverse
+    }
+
+    .items-center {
+      align-items: center
+    }
+
+    .justify-center {
+      justify-content: center
+    }
+
+    .justify-between {
+      justify-content: space-between
+    }
+
+    .gap-6 {
+      gap: 1.5rem
+    }
+
+    .gap-7 {
+      gap: 1.75rem
+    }
+
+    .gap-4 {
+      gap: 1rem
+    }
+
+    .gap-2 {
+      gap: .5rem
+    }
+
+    .gap-y-5 {
+      row-gap: 1.25rem
+    }
+
+    .gap-y-2 {
+      row-gap: .5rem
+    }
+
+    .gap-x-4 {
+      -moz-column-gap: 1rem;
+      column-gap: 1rem
+    }
+
+    .space-x-8>:not([hidden])~:not([hidden]) {
+      --tw-space-x-reverse: 0;
+      margin-right: calc(2rem * var(--tw-space-x-reverse));
+      margin-left: calc(2rem * calc(1 - var(--tw-space-x-reverse)))
+    }
+
+    .space-y-2>:not([hidden])~:not([hidden]) {
+      --tw-space-y-reverse: 0;
+      margin-top: calc(.5rem * calc(1 - var(--tw-space-y-reverse)));
+      margin-bottom: calc(.5rem * var(--tw-space-y-reverse))
+    }
+
+    .overflow-hidden {
+      overflow: hidden
+    }
+
+    .scroll-smooth {
+      scroll-behavior: smooth
+    }
+
+    .rounded-global {
+      border-radius: 5px
+    }
+
+    .rounded {
+      border-radius: .25rem
+    }
+
+    .rounded-md {
+      border-radius: .375rem
+    }
+
+    .rounded-full {
+      border-radius: 9999px
+    }
+
+    .border {
+      border-width: 1px
+    }
+
+    .border-2 {
+      border-width: 2px
+    }
+
+    .border-t {
+      border-top-width: 1px
+    }
+
+    .border-indigo-100 {
+      --tw-border-opacity: 1;
+      border-color: rgb(224 231 255 / var(--tw-border-opacity))
+    }
+
+    .bg-\[\#FFFFFF\] {
+      --tw-bg-opacity: 1;
+      background-color: rgb(255 255 255 / var(--tw-bg-opacity))
+    }
+
+    .bg-primary {
+      --tw-bg-opacity: 1;
+      background-color: rgb(37 99 235 / var(--tw-bg-opacity))
+    }
+
+    .bg-white {
+      --tw-bg-opacity: 1;
+      background-color: rgb(255 255 255 / var(--tw-bg-opacity))
+    }
+
+    .bg-gray-100 {
+      --tw-bg-opacity: 1;
+      background-color: rgb(243 244 246 / var(--tw-bg-opacity))
+    }
+
+    .object-cover {
+      -o-object-fit: cover;
+      object-fit: cover
+    }
+
+    .object-center {
+      -o-object-position: center;
+      object-position: center
+    }
+
+    .p-2 {
+      padding: .5rem
+    }
+
+    .p-3 {
+      padding: .75rem
+    }
+
+    .px-4 {
+      padding-left: 1rem;
+      padding-right: 1rem
+    }
+
+    .py-5 {
+      padding-top: 1.25rem;
+      padding-bottom: 1.25rem
+    }
+
+    .px-6 {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem
+    }
+
+    .py-4 {
+      padding-top: 1rem;
+      padding-bottom: 1rem
+    }
+
+    .px-10 {
+      padding-left: 2.5rem;
+      padding-right: 2.5rem
+    }
+
+    .py-3 {
+      padding-top: .75rem;
+      padding-bottom: .75rem
+    }
+
+    .py-10 {
+      padding-top: 2.5rem;
+      padding-bottom: 2.5rem
+    }
+
+    .py-6 {
+      padding-top: 1.5rem;
+      padding-bottom: 1.5rem
+    }
+
+    .px-8 {
+      padding-left: 2rem;
+      padding-right: 2rem
+    }
+
+    .py-16 {
+      padding-top: 4rem;
+      padding-bottom: 4rem
+    }
+
+    .pt-0 {
+      padding-top: 0
+    }
+
+    .pb-4 {
+      padding-bottom: 1rem
+    }
+
+    .pt-5 {
+      padding-top: 1.25rem
+    }
+
+    .text-center {
+      text-align: center
+    }
+
+    .font-body {
+      font-family: Dm Sans, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"
+    }
+
+    .text-xl {
+      font-size: 1.25rem;
+      line-height: 1.75rem
+    }
+
+    .text-3xl {
+      font-size: 1.875rem;
+      line-height: 2.25rem
+    }
+
+    .text-lg {
+      font-size: 1.125rem;
+      line-height: 1.75rem
+    }
+
+    .text-4xl {
+      font-size: 2.25rem;
+      line-height: 2.5rem
+    }
+
+    .text-2xl {
+      font-size: 1.5rem;
+      line-height: 2rem
+    }
+
+    .text-sm {
+      font-size: .875rem;
+      line-height: 1.25rem
+    }
+
+    .font-bold {
+      font-weight: 700
+    }
+
+    .font-medium {
+      font-weight: 500
+    }
+
+    .font-extrabold {
+      font-weight: 800
+    }
+
+    .font-semibold {
+      font-weight: 600
+    }
+
+    .tracking-wide {
+      letter-spacing: .025em
+    }
+
+    .tracking-tight {
+      letter-spacing: -.025em
+    }
+
+    .text-\[\#41454c\] {
+      --tw-text-opacity: 1;
+      color: rgb(65 69 76 / var(--tw-text-opacity))
+    }
+
+    .text-slate-900 {
+      --tw-text-opacity: 1;
+      color: rgb(15 23 42 / var(--tw-text-opacity))
+    }
+
+    .text-white {
+      --tw-text-opacity: 1;
+      color: rgb(255 255 255 / var(--tw-text-opacity))
+    }
+
+    .text-gray-600 {
+      --tw-text-opacity: 1;
+      color: rgb(75 85 99 / var(--tw-text-opacity))
+    }
+
+    .text-gray-700 {
+      --tw-text-opacity: 1;
+      color: rgb(55 65 81 / var(--tw-text-opacity))
+    }
+
+    .text-red-900 {
+      --tw-text-opacity: 1;
+      color: rgb(127 29 29 / var(--tw-text-opacity))
+    }
+
+    .text-primary-500 {
+      --tw-text-opacity: 1;
+      color: rgb(0 86 219 / var(--tw-text-opacity))
+    }
+
+    .text-gray-800 {
+      --tw-text-opacity: 1;
+      color: rgb(31 41 55 / var(--tw-text-opacity))
+    }
+
+    .text-indigo-50 {
+      --tw-text-opacity: 1;
+      color: rgb(238 242 255 / var(--tw-text-opacity))
+    }
+
+    .text-indigo-200 {
+      --tw-text-opacity: 1;
+      color: rgb(199 210 254 / var(--tw-text-opacity))
+    }
+
+    .text-primary {
+      --tw-text-opacity: 1;
+      color: rgb(37 99 235 / var(--tw-text-opacity))
+    }
+
+    .antialiased {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale
+    }
+
+    .shadow-md {
+      --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+      --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
+      box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
+    }
+
+    .transition {
+      transition-property: color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
+      transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+      transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
+      transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+      transition-duration: 150ms
+    }
+
+    .transition-colors {
+      transition-property: color, background-color, border-color, fill, stroke, -webkit-text-decoration-color;
+      transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+      transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color;
+      transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+      transition-duration: 150ms
+    }
+
+    .duration-200 {
+      transition-duration: .2s
+    }
+
+    .duration-300 {
+      transition-duration: .3s
+    }
+
+    .hover\:bg-blue-200:hover {
+      --tw-bg-opacity: 1;
+      background-color: rgb(191 219 254 / var(--tw-bg-opacity))
+    }
+
+    .hover\:text-primary-800:hover {
+      --tw-text-opacity: 1;
+      color: rgb(0 51 174 / var(--tw-text-opacity))
+    }
+
+    .focus\:outline-none:focus {
+      outline: 2px solid transparent;
+      outline-offset: 2px
+    }
+
+    .dark .dark\:border-slate-700 {
+      --tw-border-opacity: 1;
+      border-color: rgb(51 65 85 / var(--tw-border-opacity))
+    }
+
+    .dark .dark\:bg-\[\#000000\] {
+      --tw-bg-opacity: 1;
+      background-color: rgb(0 0 0 / var(--tw-bg-opacity))
+    }
+
+    .dark .dark\:bg-transparent {
+      background-color: transparent
+    }
+
+    .dark .dark\:text-\[\#b3c3d9\] {
+      --tw-text-opacity: 1;
+      color: rgb(179 195 217 / var(--tw-text-opacity))
+    }
+
+    .dark .dark\:text-gray-200 {
+      --tw-text-opacity: 1;
+      color: rgb(229 231 235 / var(--tw-text-opacity))
+    }
+
+    .dark .dark\:text-slate-100 {
+      --tw-text-opacity: 1;
+      color: rgb(241 245 249 / var(--tw-text-opacity))
+    }
+
+    .dark .dark\:text-slate-200 {
+      --tw-text-opacity: 1;
+      color: rgb(226 232 240 / var(--tw-text-opacity))
+    }
+
+    .dark .dark\:hover\:bg-blue-500:hover {
+      --tw-bg-opacity: 1;
+      background-color: rgb(59 130 246 / var(--tw-bg-opacity))
+    }
+
+    @media (min-width:640px) {
+      .sm\:max-w-xl {
+        max-width: 36rem
+      }
+
+      .sm\:grid-cols-2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr))
+      }
+
+      .sm\:flex-row {
+        flex-direction: row
+      }
+
+      .sm\:space-y-0>:not([hidden])~:not([hidden]) {
+        --tw-space-y-reverse: 0;
+        margin-top: calc(0px * calc(1 - var(--tw-space-y-reverse)));
+        margin-bottom: calc(0px * var(--tw-space-y-reverse))
+      }
+
+      .sm\:space-x-5>:not([hidden])~:not([hidden]) {
+        --tw-space-x-reverse: 0;
+        margin-right: calc(1.25rem * var(--tw-space-x-reverse));
+        margin-left: calc(1.25rem * calc(1 - var(--tw-space-x-reverse)))
+      }
+
+      .sm\:py-8 {
+        padding-top: 2rem;
+        padding-bottom: 2rem
+      }
+
+      .sm\:text-left {
+        text-align: left
+      }
+
+      .sm\:text-4xl {
+        font-size: 2.25rem;
+        line-height: 2.5rem
+      }
+    }
+
+    @media (min-width:768px) {
+      .md\:my-7 {
+        margin-top: 1.75rem;
+        margin-bottom: 1.75rem
+      }
+
+      .md\:mb-12 {
+        margin-bottom: 3rem
+      }
+
+      .md\:h-14 {
+        height: 3.5rem
+      }
+
+      .md\:w-1\/2 {
+        width: 50%
+      }
+
+      .md\:w-14 {
+        width: 3.5rem
+      }
+
+      .md\:w-3\/5 {
+        width: 60%
+      }
+
+      .md\:max-w-full {
+        max-width: 100%
+      }
+
+      .md\:max-w-7xl {
+        max-width: 80rem
+      }
+
+      .md\:grid-cols-3 {
+        grid-template-columns: repeat(3, minmax(0, 1fr))
+      }
+
+      .md\:flex-row {
+        flex-direction: row
+      }
+
+      .md\:gap-8 {
+        gap: 2rem
+      }
+
+      .md\:gap-6 {
+        gap: 1.5rem
+      }
+
+      .md\:gap-3 {
+        gap: .75rem
+      }
+
+      .md\:gap-x-6 {
+        -moz-column-gap: 1.5rem;
+        column-gap: 1.5rem
+      }
+
+      .md\:px-24 {
+        padding-left: 6rem;
+        padding-right: 6rem
+      }
+
+      .md\:px-8 {
+        padding-left: 2rem;
+        padding-right: 2rem
+      }
+
+      .md\:px-12 {
+        padding-left: 3rem;
+        padding-right: 3rem
+      }
+
+      .md\:text-base {
+        font-size: 1rem;
+        line-height: 1.5rem
+      }
+
+      .md\:text-sm {
+        font-size: .875rem;
+        line-height: 1.25rem
+      }
+    }
+
+    @media (min-width:1024px) {
+      .lg\:mb-0 {
+        margin-bottom: 0
+      }
+
+      .lg\:flex {
+        display: flex
+      }
+
+      .lg\:hidden {
+        display: none
+      }
+
+      .lg\:w-1\/3 {
+        width: 33.333333%
+      }
+
+      .lg\:w-2\/5 {
+        width: 40%
+      }
+
+      .lg\:max-w-screen-xl {
+        max-width: 1280px
+      }
+
+      .lg\:flex-row {
+        flex-direction: row
+      }
+
+      .lg\:px-8 {
+        padding-left: 2rem;
+        padding-right: 2rem
+      }
+
+      .lg\:py-12 {
+        padding-top: 3rem;
+        padding-bottom: 3rem
+      }
+
+      .lg\:text-3xl {
+        font-size: 1.875rem;
+        line-height: 2.25rem
+      }
+
+      .lg\:text-lg {
+        font-size: 1.125rem;
+        line-height: 1.75rem
+      }
+    }
+
+    @media (min-width:1280px) {
+      .xl\:rounded-global {
+        border-radius: 5px
+      }
+    }
+
+    h1,
+    h1 *,
+    h2,
+    h2 *,
+    h3,
+    h3 *,
+    h4,
+    h4 *,
+    h5,
+    h5 *,
+    h6,
+    h6 * {
+      letter-spacing: -.05em;
+      font-family: "DM Sans", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"
+    }
+  </style>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+</head>
+
+<body class="font-body antialiased text-[#41454c] bg-[#FFFFFF] dark:text-[#b3c3d9] dark:bg-[#000000]">
+
+
+  
+  <!-- NAVBAR -->
+  <div class="px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
+    <div class="relative flex items-center justify-between"><a href="#" class="inline-flex items-center"><span
+          class="ml-2 text-2xl 
+          font-semibold
+          tracking-tighter
+          text-blue-600
+          transition
+          duration-500
+          ease-in-out
+          transform
+          tracking-relaxed
+          lg:pr-3
+          hover:text-green-600
+          focus:outline-none focus:shadow-outline
+          z-50">WeCanGrowYou.</span></a>
+      <ul class="flex items-center space-x-8 lg:flex">
+        <li class="">
+          <button class="modal-open bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded inline-flex">
+            About Us 
+          </button>
+        </li>
+        <li class="">
+          <div x-data="{ tooltip: false }" class="relative z-30 inline-flex">
+            <div x-on:mouseover="tooltip = true" x-on:mouseleave="tooltip = false">
+              <button
+                onclick="shareButton(this)" onmouseout="afterClickShare(this)" 
+                class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded inline-flex">
+                
+                <span id="shareLink" style="display:none;">http://127.0.0.1:5500/wcgy_preprod/employerPage.html?companyId=</span>
+                <svg class="h-5 w-5 text-gray-900 align-center hover:text-gray-100" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="18" cy="5" r="3" />
+                  <circle cx="6" cy="12" r="3" />
+                  <circle cx="18" cy="19" r="3" />
+                  <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
+                  <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
+                </svg>
+              </button>
+            </div>
+            <div class="relative" x-cloak x-show.transition.origin.top="tooltip">
+              <div id="shareLinkText" class="text-center absolute top-0 z-10 w-24 p-2 -mt-1 text-sm leading-tight text-white bg-black transform -translate-x-2/3 -translate-y-full rounded-lg shadow-lg">
+                Copy Link
+              </div>
+              <svg class="absolute z-10 w-6 h-6 text-orange-500 transform -translate-x-8 -translate-y-3 fill-black stroke-black" width="8" height="8">
+                <rect x="12" y="-10" width="8" height="8" transform="rotate(45)" />
+              </svg>
+            </div>
+          </div>
+        </li>
+      </ul>
+      <div class="lg:hidden">
+        <button class="p-2 -mr-1 transition duration-200 rounded focus:outline-none focus:shadow-outline hover:bg-deep-purple-50 focus:bg-deep-purple-50">
+          <span>
+            <svg class="w-5 text-gray-600" class="w-5 text-gray-600" viewBox="0 0 24 24">
+              <path fill="currentColor" d="M23,13H1c-0.6,0-1-0.4-1-1s0.4-1,1-1h22c0.6,0,1,0.4,1,1S23.6,13,23,13z"></path>
+              <path fill="currentColor" d="M23,6H1C0.4,6,0,5.6,0,5s0.4-1,1-1h22c0.6,0,1,0.4,1,1S23.6,6,23,6z"></path>
+              <path fill="currentColor" d="M23,20H1c-0.6,0-1-0.4-1-1s0.4-1,1-1h22c0.6,0,1,0.4,1,1S23.6,20,23,20z"></path>
+            </svg>
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- END NAVBAR -->
+
+
+
+  <!-- COMPANY LOGO -->
+  <div class="items-center flex justify-center">
+    <section
+      class="px-6 align-center max-h-xs max-w-xs  justify-middle py-4 bg-white rounded-md dark:bg-transparent inline-flex justify-center xl:rounded-global">
+      <img id="companyLogo" alt="Company Logo"
+        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQkAAAC+CAMAAAARDgovAAAAM1BMVEX////AwMC8vLzIyMjFxcX7+/vBwcH4+Pju7u7V1dXm5ubLy8vp6eng4ODy8vLc3NzS0tLxzVi3AAADxUlEQVR4nO3d2ZaqMBQEUA1hCir8/9dekJuDQ/dqB0hVtPajT1Irw0nEZLcTERERERERERERERGR19RN6Nuu8JWbVL7o2j40NfprpVWHttiPj7+/NX1WtOE74qjDUP2QwXUe1fDpaZx6/0cKSxq+P6G/7lbKo38sBUvDH0v0l95AMzzYGq5bxtCgv/jKwpPN4bJhBPSXX1GoXs3hnEX1KVm8l8PnZNG83C+usvC5jxflsEYO5yyGrOeRsFIMs3y7SNmt1SBmrsu0WRzWzeHsgH6oV7QbBLF3LfqxnlauMmX8EIXPrIecNolhltXCbIshwriMBovjlkGMURzRD/ioftsgxih69CM+ZpNJ4yaKLKaQBEHkEcXmXeN/FPQdZOPB8iIK8mFz0+nzJgrqyfSULogxCuISq0yYw4S38C4SJ1GgH/g3SebPS6xzacLR0qKgHDVTDxIzxqGigyTRoR/7XkjfNyaObpsX0zcmbP1jgCUxoB/9WtLi8hpZqZm6prpEVV8BSokFVVHhgUHs9x79+AvQDBoRzaTYJkHUKKCjxIRmpEBOHDOS6QNYS0QkNUWLzmHEsVGBbxJjo0CHMAFPoTOKiRSzL3GLYJ+iZmgSY6PAv/tP0TkougdH5yDoHiVHkxgbBXrvCl5pR/CKm6GsmqGLK/QydAFekNIME/CBoiFKAvu/h2Sv0PwN/JIN7meOe9gfPngGTPSQydM5wCtzkuXXDLoII9i4W0C38EgWojPocpRoEgVPoz366a8gX2DmWX9NkGswpsIKW1opiYhl626G3MBTEkpCSfxGI6aSuKXKKlK1HWkFFmlVHmmnJtLunaFKAhmEdvkNU2mF/eWHaBoF/xqoX4gjvTVgeIZM9F8beNZg6LeL9MZZRDNQoIcJng08+JupLMtRgreVSRZhBG+wk3QPfOcg6R4EnWPHsTKn+PcTRXGFLqtmBFt4JP+S1D9nDbzihlfaBr0gRS9DFzp1wegkjkinsxid2BPpFCejk70infZmdAKg0amQkU4KNTo91uhEYaNTpiOdPG50Gr3RDQVGt1YY3WRidLuN0Y1HRrdgGd2MZnRbntENika3ai5006o5bJBEVkPEQjcyL3RLt9HN7YtmlUnEeex/FtYRqnezcFXWHePCe1l8Tg6T8HIfcf6Tcpg0g3s+DOeGTxgfbpXHJxuG88fc54tfnXr/YMtwzveZLbWeVYeh+iMN56ohELybn0Ad2mJ83vs8ps+K9ktSMHUT+rYr/NhCRpUvurYPzZeFICIiIiIiIiIiIiIisqJ/xI1MDprcXpEAAAAASUVORK5CYII=" />
+    </section>
+  </div>
+  <!-- END COMPANY LOGO -->
+
+
+
+  <!-- COMPANY DETAILS -->
+  <div class=" ">
+    <section class="w-full max-w-4xl px-6 mx-auto bg-white rounded-md dark:bg-transparent py-4 xl:rounded-global">
+
+      <!-- COMPANY NAME AND MOTTO -->
+      <h2 class="companyName text-5xl font-bold text-center"></h2>
+      <p id="companyMotto" class="mt-3 text-center text-xl"></p>
+      <!-- END COMPANY NAME AND MOTTO -->
+
+      <!-- COMPANY STATUS BAR -->
+      <div class="grid grid-cols-1 gap-6 mt-6 sm:grid-cols-2 md:grid-cols-3">
+        <a href="#"
+          class="flex flex-col items-center px-4 py-3 text-gray-700 transition-colors duration-200 transform rounded-md dark:text-gray-200 hover:bg-blue-200 dark:hover:bg-blue-500">
+          <span>
+            <svg class="h-12 w-12 text-gray-500"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+            </svg>            
+          </span>
+          <span class="mt-2">
+            <p id="employeeCount" class="">Number of Employees</p>
+          </span>
+        </a>
+        <a href="#"
+          class="flex flex-col items-center px-4 py-3 text-gray-700 transition-colors duration-200 transform rounded-md dark:text-gray-200 hover:bg-blue-200 dark:hover:bg-blue-500"><span>
+            <svg class="h-12 w-12 text-gray-500"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <circle cx="12" cy="12" r="9" />  <line x1="9" y1="9" x2="9.01" y2="9" />  <line x1="15" y1="9" x2="15.01" y2="9" />  <path d="M8 13a4 4 0 1 0 8 0m0 0H8" /></svg></span><span class="mt-2">
+            <p id="happinessScore" class="">Happiness Score</p>
+          </span>
+        </a>
+        <a href="#"
+          class="flex flex-col items-center px-4 py-3 text-gray-700 transition-colors duration-200 transform rounded-md dark:text-gray-200 hover:bg-blue-200 dark:hover:bg-blue-500"><span>
+            <svg class="h-12 w-12 text-gray-500"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />  <polyline points="17 6 23 6 23 12" /></svg></span><span class="mt-2">
+            <p id="growthScore" class="">Growth Score</p>
+          </span>
+        </a>
+      </div>
+      <!-- END COMPANY STATUS BAR -->
+
+    </section>
+  </div>
+  <!-- END COMPANY DETAILS -->
+
+
+
+  <!-- JOB CARDS -->
+  <div class="">
+    <div class="max-w-7xl mx-auto px-4 py-10">
+      <div class="flex flex-col gap-7 py-6 pt-0">
+        <h1 class="font-bold text-3xl tracking-tight text-slate-900 dark:text-slate-100 text-center sm:text-4xl">Explore
+          our open Positions!</h1>
+      </div>
+      <div class="">
+        <div id="jobCards" class="grid grid-cols-1 lg:grid-cols-3 gap-5 my-7 ">
+          <!-- <div class="flex flex-col rounded-global p-3 gap-y-2 border dark:border-slate-700 md:w-1/2 lg:w-1/3"><span
+              class="text-primary-500 text-4xl">
+              <div style="font-size:inherit;color:inherit;padding:2px"><svg stroke="currentColor" fill="currentColor"
+                  stroke-width="0" viewBox="0 0 576 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M232 237.2c31.8-15.2 48.4-38.2 48.4-74 0-70.6-52.6-87.8-113.3-87.8H0v354.4h171.8c64.4 0 124.9-30.9 124.9-102.9 0-44.5-21.1-77.4-64.7-89.7zM77.9 135.9H151c28.1 0 53.4 7.9 53.4 40.5 0 30.1-19.7 42.2-47.5 42.2h-79v-82.7zm83.3 233.7H77.9V272h84.9c34.3 0 56 14.3 56 50.6 0 35.8-25.9 47-57.6 47zm358.5-240.7H376V94h143.7v34.9zM576 305.2c0-75.9-44.4-139.2-124.9-139.2-78.2 0-131.3 58.8-131.3 135.8 0 79.9 50.3 134.7 131.3 134.7 61.3 0 101-27.6 120.1-86.3H509c-6.7 21.9-34.3 33.5-55.7 33.5-41.3 0-63-24.2-63-65.3h185.1c.3-4.2.6-8.7.6-13.2zM390.4 274c2.3-33.7 24.7-54.8 58.5-54.8 35.4 0 53.2 20.8 56.2 54.8H390.4z">
+                  </path>
+                </svg></div>
+            </span>
+            <p class="font-extrabold text-slate-900 dark:text-slate-200 ">Java Developer</p><button
+              class="modal-open bg-primary rounded-global text-white p-2 w-20 items-center inline-flex">Apply <span
+                class="order-last">
+                <div style="font-size:inherit;color:inherit;padding:2px"><svg stroke="currentColor" fill="currentColor"
+                    stroke-width="0" viewBox="0 0 448 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M190.5 66.9l22.2-22.2c9.4-9.4 24.6-9.4 33.9 0L441 239c9.4 9.4 9.4 24.6 0 33.9L246.6 467.3c-9.4 9.4-24.6 9.4-33.9 0l-22.2-22.2c-9.5-9.5-9.3-25 .4-34.3L311.4 296H24c-13.3 0-24-10.7-24-24v-32c0-13.3 10.7-24 24-24h287.4L190.9 101.2c-9.8-9.3-10-24.8-.4-34.3z">
+                    </path>
+                  </svg></div>
+              </span></button>
+          </div>
+          <div class="flex flex-col gap-y-2 rounded-global p-3 border dark:border-slate-700 md:w-1/2 lg:w-1/3"><span
+              class="text-4xl text-primary-500">
+              <div style="font-size:inherit;color:inherit;padding:2px"><svg stroke="currentColor" fill="currentColor"
+                  stroke-width="0" viewBox="0 0 512 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zm-141.651-35.33c4.937-32.999-20.191-50.739-54.55-62.573l11.146-44.702-27.213-6.781-10.851 43.524c-7.154-1.783-14.502-3.464-21.803-5.13l10.929-43.81-27.198-6.781-11.153 44.686c-5.922-1.349-11.735-2.682-17.377-4.084l.031-.14-37.53-9.37-7.239 29.062s20.191 4.627 19.765 4.913c11.022 2.751 13.014 10.044 12.68 15.825l-12.696 50.925c.76.194 1.744.473 2.829.907-.907-.225-1.876-.473-2.876-.713l-17.796 71.338c-1.349 3.348-4.767 8.37-12.471 6.464.271.395-19.78-4.937-19.78-4.937l-13.51 31.147 35.414 8.827c6.588 1.651 13.045 3.379 19.4 5.006l-11.262 45.213 27.182 6.781 11.153-44.733a1038.209 1038.209 0 0 0 21.687 5.627l-11.115 44.523 27.213 6.781 11.262-45.128c46.404 8.781 81.299 5.239 95.986-36.727 11.836-33.79-.589-53.281-25.004-65.991 17.78-4.098 31.174-15.792 34.747-39.949zm-62.177 87.179c-8.41 33.79-65.308 15.523-83.755 10.943l14.944-59.899c18.446 4.603 77.6 13.717 68.811 48.956zm8.417-87.667c-7.673 30.736-55.031 15.12-70.393 11.292l13.548-54.327c15.363 3.828 64.836 10.973 56.845 43.035z">
+                  </path>
+                </svg></div>
+            </span>
+            <p class="font-extrabold text-slate-900 dark:text-slate-200">AWS Engineer</p><button
+              class="modal-open bg-primary rounded-global text-white p-2 w-20 items-center inline-flex">Apply <span
+                class="order-last">
+                <div style="font-size:inherit;color:inherit;padding:2px"><svg stroke="currentColor" fill="currentColor"
+                    stroke-width="0" viewBox="0 0 448 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M190.5 66.9l22.2-22.2c9.4-9.4 24.6-9.4 33.9 0L441 239c9.4 9.4 9.4 24.6 0 33.9L246.6 467.3c-9.4 9.4-24.6 9.4-33.9 0l-22.2-22.2c-9.5-9.5-9.3-25 .4-34.3L311.4 296H24c-13.3 0-24-10.7-24-24v-32c0-13.3 10.7-24 24-24h287.4L190.9 101.2c-9.8-9.3-10-24.8-.4-34.3z">
+                    </path>
+                  </svg></div>
+              </span></button>
+          </div>
+          <div class="flex flex-col gap-y-2 rounded-global p-3 border dark:border-slate-700 md:w-1/2 lg:w-1/3"><span
+              class="text-4xl text-primary-500">
+              <div style="font-size:inherit;color:inherit;padding:2px"><svg stroke="currentColor" fill="currentColor"
+                  stroke-width="0" viewBox="0 0 512 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M383.8 351.7c2.5-2.5 105.2-92.4 105.2-92.4l-17.5-7.5c-10-4.9-7.4-11.5-5-17.4 2.4-7.6 20.1-67.3 20.1-67.3s-47.7 10-57.7 12.5c-7.5 2.4-10-2.5-12.5-7.5s-15-32.4-15-32.4-52.6 59.9-55.1 62.3c-10 7.5-20.1 0-17.6-10 0-10 27.6-129.6 27.6-129.6s-30.1 17.4-40.1 22.4c-7.5 5-12.6 5-17.6-5C293.5 72.3 255.9 0 255.9 0s-37.5 72.3-42.5 79.8c-5 10-10 10-17.6 5-10-5-40.1-22.4-40.1-22.4S183.3 182 183.3 192c2.5 10-7.5 17.5-17.6 10-2.5-2.5-55.1-62.3-55.1-62.3S98.1 167 95.6 172s-5 9.9-12.5 7.5C73 177 25.4 167 25.4 167s17.6 59.7 20.1 67.3c2.4 6 5 12.5-5 17.4L23 259.3s102.6 89.9 105.2 92.4c5.1 5 10 7.5 5.1 22.5-5.1 15-10.1 35.1-10.1 35.1s95.2-20.1 105.3-22.6c8.7-.9 18.3 2.5 18.3 12.5S241 512 241 512h30s-5.8-102.7-5.8-112.8 9.5-13.4 18.4-12.5c10 2.5 105.2 22.6 105.2 22.6s-5-20.1-10-35.1 0-17.5 5-22.5z">
+                  </path>
+                </svg></div>
+            </span>
+            <p class="font-extrabold text-slate-900 dark:text-slate-200">Full Stack Developer</p><button
+              class="modal-open bg-primary rounded-global text-white p-2 w-20 items-center inline-flex">Apply <span
+                class="order-last">
+                <div style="font-size:inherit;color:inherit;padding:2px"><svg stroke="currentColor" fill="currentColor"
+                    stroke-width="0" viewBox="0 0 448 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M190.5 66.9l22.2-22.2c9.4-9.4 24.6-9.4 33.9 0L441 239c9.4 9.4 9.4 24.6 0 33.9L246.6 467.3c-9.4 9.4-24.6 9.4-33.9 0l-22.2-22.2c-9.5-9.5-9.3-25 .4-34.3L311.4 296H24c-13.3 0-24-10.7-24-24v-32c0-13.3 10.7-24 24-24h287.4L190.9 101.2c-9.8-9.3-10-24.8-.4-34.3z">
+                    </path>
+                  </svg></div>
+              </span></button>
+          </div> -->
+        </div>
+        <!-- <div class="flex flex-col gap-y-5 my-4 md:flex-row md:gap-x-6 md:my-7">
+          <div class="flex flex-col gap-y-2 rounded-global p-3 border dark:border-slate-700 md:w-1/2 lg:w-1/3"><span
+              class="text-4xl text-primary-500">
+              <div style="font-size:inherit;color:inherit;padding:2px"><svg stroke="currentColor" fill="currentColor"
+                  stroke-width="0" viewBox="0 0 640 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M318.4 16l-161 480h77.5l25.4-81.4h119.5L405 496h77.5L318.4 16zm-40.3 341.9l41.2-130.4h1.5l40.9 130.4h-83.6zM640 405l-10-31.4L462.1 358l19.4 56.5L640 405zm-462.1-47L10 373.7 0 405l158.5 9.4 19.4-56.4z">
+                  </path>
+                </svg></div>
+            </span>
+            <p class="font-extrabold text-slate-900 dark:text-slate-200">Operations Support</p><button
+              class="modal-open bg-primary rounded-global text-white p-2 w-20 items-center inline-flex">Apply <span
+                class="order-last">
+                <div style="font-size:inherit;color:inherit;padding:2px"><svg stroke="currentColor" fill="currentColor"
+                    stroke-width="0" viewBox="0 0 448 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M190.5 66.9l22.2-22.2c9.4-9.4 24.6-9.4 33.9 0L441 239c9.4 9.4 9.4 24.6 0 33.9L246.6 467.3c-9.4 9.4-24.6 9.4-33.9 0l-22.2-22.2c-9.5-9.5-9.3-25 .4-34.3L311.4 296H24c-13.3 0-24-10.7-24-24v-32c0-13.3 10.7-24 24-24h287.4L190.9 101.2c-9.8-9.3-10-24.8-.4-34.3z">
+                    </path>
+                  </svg></div>
+              </span></button>
+          </div>
+          <div class="flex flex-col gap-y-2 rounded-global p-3 border dark:border-slate-700 md:w-1/2 lg:w-1/3"><span
+              class="text-4xl text-primary-500">
+              <div style="font-size:inherit;color:inherit;padding:2px"><svg stroke="currentColor" fill="currentColor"
+                  stroke-width="0" viewBox="0 0 512 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M502.285 159.704l-234-156c-7.987-4.915-16.511-4.96-24.571 0l-234 156C3.714 163.703 0 170.847 0 177.989v155.999c0 7.143 3.714 14.286 9.715 18.286l234 156.022c7.987 4.915 16.511 4.96 24.571 0l234-156.022c6-3.999 9.715-11.143 9.715-18.286V177.989c-.001-7.142-3.715-14.286-9.716-18.285zM278 63.131l172.286 114.858-76.857 51.429L278 165.703V63.131zm-44 0v102.572l-95.429 63.715-76.857-51.429L234 63.131zM44 219.132l55.143 36.857L44 292.846v-73.714zm190 229.715L61.714 333.989l76.857-51.429L234 346.275v102.572zm22-140.858l-77.715-52 77.715-52 77.715 52-77.715 52zm22 140.858V346.275l95.429-63.715 76.857 51.429L278 448.847zm190-156.001l-55.143-36.857L468 219.132v73.714z">
+                  </path>
+                </svg></div>
+            </span>
+            <p class="font-extrabold text-slate-900 dark:text-slate-200">Device Security Admin</p><button
+              class="modal-open bg-primary rounded-global text-white p-2 w-20 items-center inline-flex">Apply <span
+                class="order-last">
+                <div style="font-size:inherit;color:inherit;padding:2px"><svg stroke="currentColor" fill="currentColor"
+                    stroke-width="0" viewBox="0 0 448 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M190.5 66.9l22.2-22.2c9.4-9.4 24.6-9.4 33.9 0L441 239c9.4 9.4 9.4 24.6 0 33.9L246.6 467.3c-9.4 9.4-24.6 9.4-33.9 0l-22.2-22.2c-9.5-9.5-9.3-25 .4-34.3L311.4 296H24c-13.3 0-24-10.7-24-24v-32c0-13.3 10.7-24 24-24h287.4L190.9 101.2c-9.8-9.3-10-24.8-.4-34.3z">
+                    </path>
+                  </svg></div>
+              </span></button>
+          </div>
+          <div class="flex flex-col gap-y-2 rounded-global p-3 border dark:border-slate-700 md:w-1/2 lg:w-1/3"><span
+              class="text-4xl text-primary-500">
+              <div style="font-size:inherit;color:inherit;padding:2px"><svg stroke="currentColor" fill="currentColor"
+                  stroke-width="0" viewBox="0 0 472 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M422.5 202.9c30.7 0 33.5 53.1-.3 53.1h-10.8v44.3h-26.6v-97.4h37.7zM472 352.6C429.9 444.5 350.4 504 248 504 111 504 0 393 0 256S111 8 248 8c97.4 0 172.8 53.7 218.2 138.4l-186 108.8L472 352.6zm-38.5 12.5l-60.3-30.7c-27.1 44.3-70.4 71.4-122.4 71.4-82.5 0-149.2-66.7-149.2-148.9 0-82.5 66.7-149.2 149.2-149.2 48.4 0 88.9 23.5 116.9 63.4l59.5-34.6c-40.7-62.6-104.7-100-179.2-100-121.2 0-219.5 98.3-219.5 219.5S126.8 475.5 248 475.5c78.6 0 146.5-42.1 185.5-110.4z">
+                  </path>
+                </svg></div>
+            </span>
+            <p class="font-extrabold text-slate-900 dark:text-slate-200">UI-UX Designer</p>
+            <button class="modal-open bg-primary w-20 rounded-global text-white p-2 items-center inline-flex">
+              Apply 
+              <span class="order-last">
+                <div style="font-size:inherit;color:inherit;padding:2px"><svg stroke="currentColor" fill="currentColor"
+                    stroke-width="0" viewBox="0 0 448 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M190.5 66.9l22.2-22.2c9.4-9.4 24.6-9.4 33.9 0L441 239c9.4 9.4 9.4 24.6 0 33.9L246.6 467.3c-9.4 9.4-24.6 9.4-33.9 0l-22.2-22.2c-9.5-9.5-9.3-25 .4-34.3L311.4 296H24c-13.3 0-24-10.7-24-24v-32c0-13.3 10.7-24 24-24h287.4L190.9 101.2c-9.8-9.3-10-24.8-.4-34.3z">
+                    </path>
+                  </svg></div>
+              </span>
+            </button>
+          </div>
+        </div> -->
+      </div>
+    </div>
+  </div>
+  <!-- END JOB CARDS -->
+
+
+
+  <!-- TESTIMONIAL CARDS -->
+  <div class="bg-white py-6 sm:py-8 lg:py-12">
+    <div class="max-w-screen-xl px-4 md:px-8 mx-auto">
+      <h2 class="text-gray-800 text-2xl lg:text-3xl font-bold text-center mb-8 md:mb-12">{Employee Testimonial}</h2>
+      <div class="grid gap-4 md:gap-8 md:grid-cols-3">
+        <div class="testimonialCard flex flex-col items-center gap-4 px-8 py-6 bg-primary rounded-global md:gap-6"> 
+          <div id="aCardMsg" class="max-w-md text-white lg:text-lg text-center overflow-hidden">“Perfect for Work-Life Balance. My dream Company ”</div><!--70 Characters only -->
+          <div class="flex flex-col sm:flex-row items-center gap-2 md:gap-3">
+            <div class="w-12 md:w-14 h-12 md:h-14 bg-gray-100 border-2 border-indigo-100 rounded-full overflow-hidden">
+              <img id="aCardPhoto" alt="No alt"
+                src="https://images.unsplash.com/photo-1567515004624-219c11d31f2e??auto=format&amp;q=75&amp;fit=crop&amp;w=112"
+                class="w-full h-full object-cover object-center " /></div>
+            <div class="">
+              <div id="aCardName" class="text-indigo-50 text-sm md:text-base font-bold text-center sm:text-left">{First Employee Name}</div>
+              <p id="aCardCompany" class="text-indigo-200 text-sm md:text-sm text-center sm:text-left">{Designation} / {Company}</p>
+            </div>
+          </div>
+        </div>
+        <div class="testimonialCard flex flex-col items-center gap-4 px-8 py-6 bg-primary rounded-global md:gap-6">
+          <div id="bCardMsg" class="max-w-md text-white lg:text-lg text-center overflow-hidden">“We are ranked as first for WCGY-Best-Place-To-Work”</div><!--70 Characters only -->
+          <div class="flex flex-col sm:flex-row items-center gap-2 md:gap-3">
+            <div class="w-12 md:w-14 h-12 md:h-14 bg-gray-100 border-2 border-indigo-100 rounded-full overflow-hidden">
+              <img id="bCardPhoto" alt="No alt"
+                src="https://images.unsplash.com/photo-1532073150508-0c1df022bdd1?auto=format&amp;q=75&amp;fit=crop&amp;w=112"
+                class="w-full h-full object-cover object-center " /></div>
+            <div class="">
+              <div id="bCardName" class="text-indigo-50 text-sm md:text-base font-bold text-center sm:text-left">{Second Employee Name}</div>
+              <p id="bCardCompany" class="text-indigo-200 text-sm md:text-sm text-center sm:text-left">{Designation} / {Company}</p>
+            </div>
+          </div>
+        </div>
+        <div class="testimonialCard flex flex-col items-center gap-4 px-8 py-6 bg-primary rounded-global md:gap-6">
+          <div id="cCardMsg" class="max-w-md text-white lg:text-lg text-center overflow-hidden">“I'm happy that i met my best team mates here who motivates me a lot”</div><!--70 Characters only -->
+          <div class="flex flex-col sm:flex-row items-center gap-2 md:gap-3">
+            <div class="w-12 md:w-14 h-12 md:h-14 bg-gray-100 border-2 border-indigo-100 rounded-full overflow-hidden">
+              <img id="cCardPhoto" alt="No alt"
+                src="https://images.unsplash.com/photo-1567515004624-219c11d31f2e??auto=format&amp;q=75&amp;fit=crop&amp;w=112"
+                class="w-full h-full object-cover object-center " /></div>
+            <div class="">
+              <div id="cCardName" class="text-indigo-50 text-sm md:text-base font-bold text-center sm:text-left">{Third Employee Name}</div>
+              <p id="cCardCompany" class="text-indigo-200 text-sm md:text-sm text-center sm:text-left">{Designation} / {Company}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END TESTIMONIAL CARDS -->
+
+
+
+  <!-- COMPANY CONTACT INFO -->
+  <div class="flex justify-center">
+    <div id="contactInfo" class="py-16 text-center max-w-7xl mx-auto">
+      <a id="companyWebsite" href="">
+        <h1 class="companyName text-3xl font-semibold">{Company Name}</h1>
+        <p  href="" class="mx-auto">Visit Official Website</p>
+      </a>
+      <p id="companyAddress" class=" mx-auto my-5 ">{Address of the Company}</p>
+      <!-- <img alt="Backed by WCGY"
+        src="data:image/png;base64,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"
+        class=" max-h-xs max-w-xs  " /> -->
+      <p class="ml-2 text-4xl
+      font-extrabold
+      tracking-tighter
+      text-blue-600
+      transition
+      duration-500
+      ease-in-out
+      transform
+      tracking-relaxed
+      lg:pr-3
+      hover:text-green-600
+      focus:outline-none focus:shadow-outline
+      z-50">WeCanGrowYou.</p>
+    </div>
+  </div>
+  <!-- END COMPANY CONTACT INFO -->
+
+
+
+  <!-- FOOTER -->
+  <li class="flex items-center gap-x-4"></li>
+  <div class="pb-4 pt-0">
+    <div class="px-4 mx-auto sm:max-w-xl md:max-w-7xl md:px-12 lg:max-w-screen-xl lg:px-8">
+      <div class="flex flex-col-reverse justify-between pt-5 border-t lg:flex-row">
+        <p class="text-sm ">© Copyright 2022. WeCanGrowYou. All rights reserved.</p>
+        <div class="flex"><a href="/privacy-policy"
+            class="transition-colors duration-300 text-primary hover:text-primary-800">Privacy Policy</a></div>
+        <div class="flex"><a href="/terms-and-conditions"
+            class="transition-colors duration-300 text-primary hover:text-primary-800">Terms and conditions</a></div>
+        <ul class="flex flex-col mb-3 space-y-2 lg:mb-0 sm:space-y-0 sm:space-x-5 sm:flex-row">
+          <p class=" ">Made in India</p>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- END FOOTER -->
+
+
+
+  <!-- ABOUT COMPANY MODAL-->
+  <div class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center">
+    <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
+
+    <div class="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
+
+      <div
+        class="modal-close absolute top-0 right-0 cursor-pointer flex flex-col items-center mt-4 mr-4 text-white text-sm z-50">
+        <svg class="fill-current text-white" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+          viewBox="0 0 18 18">
+          <path
+            d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z">
+          </path>
+        </svg>
+        <span class="text-sm">(Esc)</span>
+      </div>
+
+      <!-- Add margin if you want to see some of the overlay behind the modal-->
+      <div class="modal-content py-4 text-left px-6">
+        <!--Title-->
+        <div class="flex justify-between items-center pb-3">
+          <p class="companyName text-2xl font-bold">{Name of Company}</p>
+          <div class="modal-close cursor-pointer z-50">
+            <svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+              viewBox="0 0 18 18">
+              <path
+                d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z">
+              </path>
+            </svg>
+          </div>
+        </div>
+
+        <!--Body-->
+        <p>{Details}</p>
+        <p id="establishedYear">{Established on which Year}</p>
+        <p id="industryType">{Industry type of Company}</p>
+        <p id="companyHeadquarters">{HeadQuarters/Head Office}</p>
+        <p id="companyIdNum">{CIN / Other Registration IDs}</p>
+
+        <!--Footer-->
+        <!-- <div class="flex justify-end pt-2">
+          <button
+            class="px-4 bg-transparent p-3 rounded-lg text-indigo-500 hover:bg-gray-100 hover:text-indigo-400 mr-2">Action</button>
+          <button class="modal-close px-4 bg-indigo-500 p-3 rounded-lg text-white hover:bg-indigo-400">Close</button>
+        </div> -->
+
+      </div>
+    </div>
+  </div>
+  <!-- END ABOUT COMPANY MODAL-->
+
+
+
+  <!-- SCRIPTS -->
+
+  <!-- MODAL SCRIPT -->
+  <script>
+    var openmodal = document.querySelectorAll('.modal-open')
+    for (var i = 0; i < openmodal.length; i++) {
+      openmodal[i].addEventListener('click', function (event) {
+        event.preventDefault()
+        toggleModal()
+      })
+    }
+
+    const overlay = document.querySelector('.modal-overlay')
+    overlay.addEventListener('click', toggleModal)
+
+    var closemodal = document.querySelectorAll('.modal-close')
+    for (var i = 0; i < closemodal.length; i++) {
+      closemodal[i].addEventListener('click', toggleModal)
+    }
+
+    document.onkeydown = function (evt) {
+      evt = evt || window.event
+      var isEscape = false
+      if ("key" in evt) {
+        isEscape = (evt.key === "Escape" || evt.key === "Esc")
+      } else {
+        isEscape = (evt.keyCode === 27)
+      }
+      if (isEscape && document.body.classList.contains('modal-active')) {
+        toggleModal()
+      }
+    };
+
+
+    function toggleModal() {
+      const body = document.querySelector('body')
+      const modal = document.querySelector('.modal')
+      modal.classList.toggle('opacity-0')
+      modal.classList.toggle('pointer-events-none')
+      body.classList.toggle('modal-active')
+    }
+
+
+  </script>
+  <!-- END MODAL SCRIPT -->
+
+
+<!-- SHARE COMPANY PROFILE PAGE / COPY TO CLIPBOARD -->
+<script>
+function shareButton(e) {
+    var copyText = $(e).find('[id=shareLink]');
+    navigator.clipboard.writeText(copyText[0].innerHTML);
+    
+    var tooltip = $(e).parent().parent().find('[id=shareLinkText]');
+    tooltip[0].innerHTML = "Link copied";
+}
+
+function afterClickShare(e) {
+    var tooltip = $(e).parent().parent().find('[id=shareLinkText]');
+    tooltip[0].innerHTML = "Copy Link";
+}
+</script>
+<!-- END COMPANY PROFILE PAGE / COPY TO CLIPBOARD -->
+
+
+  <!-- AlpineJS Library -->
+  <script defer src="https://unpkg.com/alpinejs@3.9.0/dist/cdn.min.js"></script>
+  <script src="js/employerPage.js"></script>
+
+
+</body>
+</html>

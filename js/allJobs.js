@@ -7,7 +7,7 @@ $(function(){
 
 	fetchData();
 
-	// handling the prev-btn
+	// PAGINATION BUTTONS
 	$(".prev-btn").on("click", function(){
 	  if (page > 1) {
 		page--;
@@ -16,7 +16,6 @@ $(function(){
 		// $('#page')[0].innerHTML = ": " + page;
 	});
 
-	// handling the next-btn
 	$(".next-btn").on("click", function(){
 	  if (page * pagelimit < totalrecord) {
 		page++;
@@ -24,26 +23,37 @@ $(function(){
 	  }
 		// $('#page')[0].innerHTML = ": " + page;
 	});
+	// END PAGINATION BUTTONS
 
-	// job search
+	// SEARCH BAR
 	$("#searchBar").on("submit", function(e){
 		searchValue = $("#searchField").val();
 		fetchData(searchValue);
 		e.preventDefault();
 	});
+	// END SEARCH BAR
 
-	function fetchData(searchValue = "") {
+	// FILTER BASED ON TAGS
+	$('.filterTags').on("click", function(e) {
+		searchValue = e.target.value;
+		fetchData(searchValue, true);
+	});
+	// END FILTER BASED ON TAGS
+
+
+	function fetchData(searchValue = "", searchTag = false) {
 	  // ajax() method to make api calls
 	  $.ajax({
-		url: "https://script.google.com/macros/s/AKfycbxsT7ajXCYo3e9Ikb541ojyM9CRXzsaLZ6Lkl_A1i-VdyO8A0ivP6gR0Py8JRIDDoiU/exec",
+		url: "https://script.google.com/macros/s/AKfycbx7z_WlKC-OFYUA3eeP5xVDEGWRFW8PyLVFINJAhjpGdTRewXd_kQZSV4h7KD1gupF8/exec",
 		type: "GET",
 		data: { 
 				page: page,
 				limit: pagelimit,
 				search: searchValue,
+				searchByTag: searchTag
 		},
 		success: function(data) {
-		  // console.log(data);
+		  console.log(data);
 
 		  if (data.user) {
 				var dataArr = data.user;
@@ -99,6 +109,8 @@ $(function(){
 							<div class="gap-2 flex pb-3">
 								<a href="#" class="py-1 px-4 text-sm bg-gray-900 text-white rounded-md">${job.kind}</a>
 								<a href="#" class="py-1 px-4 text-sm bg-gray-900 text-white rounded-md">${job.type}</a>
+								<a href="#" class="py-1 px-4 text-sm bg-gray-900 text-white rounded-md">${job.tags}</a>
+								<a href="http://localhost:5500/wcgy_preprod/employerPage.html?cid=${job.jobId}" class="py-1 px-4 text-sm bg-gray-900 text-white rounded-md">${job.jobId}</a>
 							</div>
 						</div>
 					`;
@@ -134,6 +146,10 @@ function afterClickShare(e) {
     tooltip[0].innerHTML = "Copy Link";
 }
 // END SHARE JOB / COPY TO CLIPBOARD
+
+
+
+
 
 
 

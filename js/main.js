@@ -57,7 +57,8 @@ function jsp_change_page(page, jsp_json_object = jobsData) {
   jobcard.innerHTML = ''
 
   for (let i = (page - 1) * jsp_records_per_page; i < (page * jsp_records_per_page) && i < jsp_json_object.length; i++) {
-    jobcard.innerHTML += `<!--Job Card-->
+    
+	jobcard.innerHTML += `<!--Job Card-->
     <section class="ml-1 items-center justify-content-center place-content-evenly float-left">
 			<div class="max-w-lg min-w-0 mx-auto z-10 justify-between">
 				<div class="flex flex-col">
@@ -109,8 +110,8 @@ function jsp_change_page(page, jsp_json_object = jobsData) {
 										</span> &nbsp;&nbsp;&nbsp;
 										<span class="flex inline-flex items-center px-2.5 py-0.5 bg-yellow-100 text-red-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900">
 										<svg text-sm class="mr-1 w-3 h-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-										<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
-									</svg>${jsp_json_object[i].lastDateToApply}
+											<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+										</svg>${jsp_json_object[i].lastDateToApply}
 										</span>
 									</div>
 									<div class="flex pt-2 inline-flex  text-sm text-gray-500">
