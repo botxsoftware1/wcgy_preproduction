@@ -4,7 +4,7 @@ window.onload = () => {
 	currentUrl = new URLSearchParams(window.location.search);
 	companyId = currentUrl.get('companyId');
 	$.ajax({
-		url: "https://script.google.com/macros/s/AKfycbzo4aZA_eYv029O8Mzb7rdnQXaEvK2mL2ghXtn7o51AwyHI0J0w4Y0aRaymza8kjUBz0w/exec",
+		url: "https://script.google.com/macros/s/AKfycbzSKdyBZt7cEKhRa3X8w4Mg8aZ2yND7pZn_VKGRUMhBAnH3mjYdhqWJYeqlRJAXJKMvBw/exec",
 		type: "GET",
 		data: { 
 			companyId: companyId,
@@ -69,21 +69,21 @@ window.onload = () => {
 						<p class="font-extrabold text-2xl text-slate-900 mb-5 dark:text-slate-200 ">${job[0]}</p>
 						<div class="flex flex-row items-center">
 							<span class="bg-blue-100 text-blue-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">
-								${job[6]} - ${job[7]}
+								${job[5]} - ${job[6]}
 							</span> &nbsp;&nbsp;&nbsp;
 							<span class="flex inline-flex items-center px-2.5 py-0.5 bg-yellow-100 text-red-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900">
 							<svg text-sm class="mr-1 w-3 h-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
 								<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
-							</svg>${job[8]}
+							</svg>${job[7]}
 							</span>
 						</div>
 						<div class="flex-1 inline-flex items-center">
 							<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
 								<path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z"></path>
 							</svg>
-							<p>${job[9]} Applied!</p>
+							<p>${job[8]} Applied!</p>
 						</div>
-						<a href="http://127.0.0.1:5500/wcgy_preprod/jobDetails?jobId=${job[1]}">
+						<a href="http://127.0.0.1:5500/wcgy_preprod/jobDetails.html?jobId=${job[1]}">
 							<button class="testimonialCard float-right modal-open bg-primary rounded-global text-white p-2 w-20 items-center inline-flex">
 								Apply
 								<span class="order-last">

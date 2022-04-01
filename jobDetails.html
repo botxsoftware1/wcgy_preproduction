@@ -2,18 +2,22 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="https://cdn.tailgrids.com/tailgrids-fallback.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" integrity="sha256-h20CPZ0QyXlBuAw7A+KluUYx/3pK+c7lYEpqLTlxjYQ=" crossorigin="anonymous" />
-    
-    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/@themesberg/flowbite@1.3.0/dist/flowbite.bundle.js"></script>
+	<link rel="stylesheet" href="https://cdn.tailgrids.com/tailgrids-fallback.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" integrity="sha256-h20CPZ0QyXlBuAw7A+KluUYx/3pK+c7lYEpqLTlxjYQ=" crossorigin="anonymous" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 
-    <title>Document</title>
+	<script src="https://cdn.jsdelivr.net/gh/tanaikech/HtmlFormObjectParserForGoogleAppsScript_js/htmlFormObjectParserForGoogleAppsScript_js.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+	<script src="https://cdn.tailwindcss.com"></script>
+	<script src="https://unpkg.com/@themesberg/flowbite@1.3.0/dist/flowbite.bundle.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+	<title>Document</title>
 </head>
 
 <body>
@@ -191,14 +195,14 @@
 				<!-- JOB DETAILS -->
 				<div class="w-full lg:w-6/12 px-4">
 					<div class="hero-content">
-						<span class="tracking-wider text-white bg-orange-500 py-1 px-2 text-sm rounded leading-loose  font-semibold" title="">
+						<span id="featuredTag" style="visibility: hidden;" class="tracking-wider text-white bg-orange-500 py-1 px-2 text-sm rounded leading-loose  font-semibold" title="">
 								<i class="fas fa-star" aria-hidden="true"></i> 
 								Featured
 						</span>
-						<h1 class=" text-dark font-bold text-4xl sm:text-[42px] lg:text-[40px] xl:text-[42px] leading-snug mb-0 ">
-							Senior Java Developer <br/>
+						<h1 id="jobName" class=" text-dark font-bold text-4xl sm:text-[42px] lg:text-[40px] xl:text-[42px] leading-snug mb-0 ">
+							<br/>
 						</h1>
-						<h4 class="flex inline-flex text-dark font-bold font-medium text-md text-primary leading-snug mb-0 "> 
+						<h4 id="companyName" class="flex inline-flex text-dark font-bold font-medium text-md text-primary leading-snug mb-0 "> 
 							<span>
 								<svg class="h-5 w-5 text-black" width="24" height="24" viewBox="0 0 24 24"
 										stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
@@ -214,77 +218,52 @@
 										<path d="M5 21v-16a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v16" />
 								</svg>
 							</span> 
-							&nbsp; 
-							Botx Automations Private Limited 
+							&nbsp;  
 						</h4>
 
 						<br>
 						<div class="flex inline-flex grid grid-cols-1 gap-2 md:grid-cols-3">
-							<span class="inline-flex  ">
+							<span id="location" class="inline-flex  ">
 								<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 px-0 mr-2" viewBox="0 0 20 20"
 									fill="gray-300">
 									<path fill-rule="evenodd"
 										d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
 										clip-rule="evenodd" />
 								</svg>
-								Kottayam,Kerala
 							</span>
 							<!-- <p class="text-black  font-bold">⌘</p> -->
-							<p class=" lg:justify-start sm:justify-start md:justify-start">⌘ &nbsp; Job ID: 22222</p>
+							<p id="jobId" class=" lg:justify-start sm:justify-start md:justify-start">⌘ &nbsp; Job ID: </p>
 							<!-- <p class="text-black font-bold">⌘</p> -->
-							<p class="">⌘ &nbsp; Apply by: 12/03/2022</p>
+							<p id="applyBy" class="">⌘ Apply by: </p>
 						</div>
-						<p class="text-base mb-4 mt-2 text-body-color overflow:visible">
-							A Java developer is responsible for developing applications and software
-							using the programming language Java. A Java developer is a specialized
-							to collaborate with web developers and software
-							engineers to integrate Java into business applications, software, and websites.
+						<p id="jobBrief" class="text-base mb-4 mt-2 text-body-color overflow:visible">
+							<br><br><br><br><br><br>
 						</p>
 						<div class="clients ">
-								<div class="flex inline-flex">
-									<h4 class="font-normal text-lg flex items-center text-body-color">
-										Job Details
-									</h4>
-								</div>
+							<div class="flex inline-flex">
+								<h4 class="font-normal text-lg flex items-center text-body-color">
+									Job Details
+								</h4>
+							</div>
 
-								<hr class="mb-2">
+							<hr class="mb-2">
 
-								<p class="flex inline-flex align-baseline">Salary:
-									<svg class="h-5 w-5 text-gray-500" width="24" height="24" viewBox="0 0 24 24"
-										stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
-										stroke-linejoin="round">
-										<path stroke="none" d="M0 0h24v24H0z" />
-										<path d="M18 6h-11h3a4 4 0 0 1 0 8h-3l6 6" />
-										<line x1="7" y1="10" x2="18" y2="10" />
-									</svg>
-									8,53,583.23/- Per Annum.
-								</p>
-								<p>Experience: 2-3 Years</p>
-								<p>Employement Type: Full-Time Job </p>
-								<p>Location: Remote </p>
-								<p>Vacancy: 12</p>
-								<p>Skill Tags: 
-									<span class="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">
-										Java EE2
-									</span>
-									<span class="bg-gray-100 text-gray-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">	
-										Spring
-									</span>
-									<span class="bg-red-100 text-red-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900">
-										Spring-Boot
-									</span>
-									<span class="bg-green-100 text-green-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">
-										MySQL
-									</span>
-									<span class="bg-indigo-100 text-indigo-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-indigo-200 dark:text-indigo-900">
-										Informatica
-									</span>
-									<span class="bg-purple-100 text-purple-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-purple-200 dark:text-purple-900">
-										CI/CD Tools
-									</span>
-								</p>
-								<p>Industry: Software Development </p>
-								<br>
+							<p id="salary" class="flex inline-flex align-baseline">Salary:
+								<svg class="h-5 w-5 text-gray-500" width="24" height="24" viewBox="0 0 24 24"
+									stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+									stroke-linejoin="round">
+									<path stroke="none" d="M0 0h24v24H0z" />
+									<path d="M18 6h-11h3a4 4 0 0 1 0 8h-3l6 6" />
+									<line x1="7" y1="10" x2="18" y2="10" />
+								</svg>
+							</p>
+							<p id="experience">Experience: </p>
+							<p id="jobType">Employement Type: </p>
+							<p id="workLocation">Location: </p>
+							<p id="vacancy">Vacancy: </p>
+							<p id="skillTags">Skill Tags: </p>
+							<p id="industry">Industry: </p>
+							<br>
 						</div>
 						<ul class="flex flex-wrap items-center">
 							<li>
@@ -293,7 +272,7 @@
 								</a>
 							</li>
 							<li>
-								<a href="javascript:void(0)" class=" py-4 px-6 sm:px-10 lg:px-8 xl:px-10 inline-flex items-center justify-center text-center text-base font-normal text-body-color hover:text-primary ">
+								<a id="companyPage" href="http://127.0.0.1:5500/wcgy_preprod/employerPage.html?companyId=" class=" py-4 px-6 sm:px-10 lg:px-8 xl:px-10 inline-flex items-center justify-center text-center text-base font-normal text-body-color hover:text-primary ">
 									<span class="mr-2 items-center">
 										<svg class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24"
 											stroke="currentColor">
@@ -406,18 +385,22 @@
 					<div class="bg-white relative rounded-lg p-8 sm:p-12 shadow py-12 px-8 hover:shadow-2xl delay-75 duration-100 ">
 						
 						<!-- JOB APPLY FORM -->
-						<form class="z-20">
+						<form id="applyForm" class="z-20" autocomplete="off">
+							<!-- NAME -->
 							<div class="mb-6">
-								<input type="text" placeholder="Your Name" class=" w-full rounded py-3 px-[14px] text-body-color text-base border border-[f0f0f0] outline-none focus-visible:shadow-none focus:border-primary " />
+								<input id="applicantName" name=“entry.467876062” data-name="Name" type="text" placeholder="Your Name" tabindex="1" class=" w-full rounded py-3 px-[14px] text-body-color text-base border border-[f0f0f0] outline-none focus-visible:shadow-none focus:border-primary" autofocus/>
 							</div>
+							<!-- EMAIL -->
 							<div class="mb-6">
-								<input type="email" placeholder="Your Email" class=" w-full rounded py-3 px-[14px] text-body-color text-base border border-[f0f0f0] outline-none focus-visible:shadow-none focus:border-primary " />
+								<input id="email" name=“entry.362738034” data-name="Email" type="email" placeholder="Your Email" tabindex="2" class=" w-full rounded py-3 px-[14px] text-body-color text-base border border-[f0f0f0] outline-none focus-visible:shadow-none focus:border-primary " />
 							</div>
+							<!-- PHONE -->
 							<div class="mb-6">
-								<input type="text" placeholder="Your Phone" class=" w-full rounded py-3 px-[14px] text-body-color text-base border border-[f0f0f0] outline-none focus-visible:shadow-none focus:border-primary " />
+								<input id="phone" name=“entry.961587284” data-name="Phone" type="tel" minlength="10" maxlength="10" placeholder="Your Phone" tabindex="3" class=" w-full rounded py-3 px-[14px] text-body-color text-base border border-[f0f0f0] outline-none focus-visible:shadow-none focus:border-primary " />
 							</div>
+							<!-- RESUME -->
 							<div>
-								<div class="mb-6 mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+								<div id="resumeBox" class="mb-6 mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
 									<div class="space-y-1 text-center">
 										<svg class="h-12 w-12 text-gray-300 mx-auto" width="24" height="24"
 											viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
@@ -430,11 +413,11 @@
 											<line x1="13" y1="17" x2="15" y2="17" />
 										</svg>
 										<div class="flex text-sm text-gray-600">
-											<label for="file-upload" class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
-												<span>Upload Resume</span>
-												<input id="file-upload" name="file-upload" type="file" class="sr-only">
+											<label for="resume" class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
+												<span class="resumeBoxText">Upload Resume</span>
+												<input id="resume" name="resume" type="file" tabindex="4" class="sr-only" multiple>
 											</label>
-											<p class="pl-1">or drag and drop</p>
+											<p class="resumeBoxText pl-1">or drag and drop</p>
 										</div>
 										<p class="text-xs text-gray-500">
 											a PDF up to 250KB
@@ -442,9 +425,9 @@
 									</div>
 								</div>
 							</div>
-
+							<!-- APPLY BUTTON -->
 							<div>
-								<button type="submit" class=" w-full text-white bg-primary border border-primary p-3 transition hover:bg-opacity-90 rounded-lg ">
+								<button id="applyBtn" value="" name="submit" form="contact" type="button" class="w-full text-white bg-primary border border-primary p-3 transition hover:bg-opacity-90 rounded-lg">
 									Apply Now
 								</button>
 							</div>
@@ -532,7 +515,6 @@
 				</div>
 				<!-- END APPLY FORM, RIGHT CIRCLE AND DOTS -->
 
-
 			</div>
 		</div>
 	</div>
@@ -565,13 +547,7 @@
 					</h2>
 					<div id="accordion-flush-body-1" aria-labelledby="accordion-flush-heading-1">
 							<div class="py-5 border-b border-gray-200 dark:border-gray-700">
-									<p class="mb-2 text-gray-500 dark:text-gray-400">Lorem ipsum dolor, sit amet consectetur adipisicing
-											elit. Laudantium, obcaecati ad itaque nihil natus nulla, recusandae eligendi sequi eum mollitia
-											inventore odio vitae neque ex voluptates ullam reiciendis hic excepturi! <a
-													href="https://flowbite.com/docs/getting-started/introduction/"
-													class="text-blue-600 dark:text-blue-500 hover:underline">get started</a> and start
-											developing
-											websites even faster with components on top of Tailwind CSS.</p>
+									<p id="requirements" class="mb-2 text-gray-500 dark:text-gray-400"></p>
 							</div>
 					</div>
 					<h2 id="accordion-flush-heading-2">
@@ -590,14 +566,7 @@
 					</h2>
 					<div id="accordion-flush-body-2" class="hidden" aria-labelledby="accordion-flush-heading-2">
 							<div class="py-5 border-b border-gray-200 dark:border-gray-700">
-									<p class="mb-2 text-gray-500 dark:text-gray-400">Flowbite is first conceptualized and designed using
-											the
-											Figma software so everything you see in the library has a design equivalent in our Figma file.
-									</p>
-									<p class="text-gray-500 dark:text-gray-400">Check out the <a href="https://flowbite.com/figma/"
-													class="text-blue-600 dark:text-blue-500 hover:underline">Figma design system</a> based on
-											the
-											utility classes from Tailwind CSS and components from Flowbite.</p>
+									<p id="roleAndResponsibility" class="mb-2 text-gray-500 dark:text-gray-400"></p>
 							</div>
 					</div>
 					<h2 id="accordion-flush-heading-3">
@@ -616,16 +585,7 @@
 					</h2>
 					<div id="accordion-flush-body-3" class="hidden" aria-labelledby="accordion-flush-heading-3">
 							<div class="py-5 border-b border-gray-200 dark:border-gray-700">
-									<p class="mb-2 text-gray-500 dark:text-gray-400">The main difference is that the core components
-											from
-											Flowbite are open source under the MIT license, whereas Tailwind UI is a paid product. Another
-											difference is that Flowbite relies on smaller and standalone components, whereas Tailwind UI
-											offers
-											sections of pages.</p>
-									<p class="mb-2 text-gray-500 dark:text-gray-400">However, we actually recommend using both Flowbite,
-											Flowbite Pro, and even Tailwind UI as there is no technical reason stopping you from using the
-											best
-											of two worlds.</p>
+									<p id="benefits" class="mb-2 text-gray-500 dark:text-gray-400"></p>
 									<p class="mb-2 text-gray-500 dark:text-gray-400">Learn more about these technologies:</p>
 									<ul class="pl-5 list-disc text-gray-500 dark:text-gray-400">
 											<li><a href="https://flowbite.com/pro/"
@@ -638,8 +598,7 @@
 			</div>
 
 			<p class="mt-5">It is the sole responsibilty of each candidate to Reda & Ensure that this Job Post matches their Skillsets. We are not responsible to provide you jobs. Read our policy to know more
-<a class="text-blue-600 hover:underline"
-							href="https://flowbite.com/docs/getting-started/introduction/" target="_blank">Job Posting Policy</a>.
+				<a class="text-blue-600 hover:underline" href="https://flowbite.com/docs/getting-started/introduction/" target="_blank">Job Posting Policy</a>.
 			</p>
 			<script src="https://unpkg.com/flowbite@1.3.3/dist/flowbite.js"></script>
 	</div>
@@ -755,6 +714,171 @@
 		</div>
 	</div>
 	<!-- End of Disclaimers section -->
+
+
+
+	<!-- SCRIPTS -->
+	
+
+	<!-- DRAG AND DROP -->
+	<script>
+		document.getElementById('resumeBox').addEventListener("dragenter", function(e) {
+			e.preventDefault();
+			console.log(e);
+			document.getElementById('resumeBox').classList.remove("border-dashed","border-gray-300");
+		});
+
+		document.getElementById('resumeBox').addEventListener("dragover", function(e) {
+			e.preventDefault();
+			console.log("hi");
+			document.getElementById('resumeBox').classList.remove("border-dashed","border-gray-300");
+		});
+
+		document.getElementById('resumeBox').addEventListener("dragleave", function(e) {
+			console.log("bye");
+			document.getElementById('resumeBox').classList.add("border-dashed","border-gray-300");
+		});
+
+		document.getElementById('resumeBox').addEventListener("drop", function(e) {
+			e.preventDefault();
+			console.log("bye");
+			document.getElementById('resumeBox').classList.add("border-dashed","border-gray-300");
+
+		});
+	</script>
+
+	<!-- FORM ONSUBMIT CLICK -->
+	<script>
+		$(document).on("click", '#applyBtn', function() 
+		{
+			var applicantName = document.getElementById('applicantName').value;
+			var applicantEmail = document.getElementById('email').value;
+			var applicantPhone = document.getElementById('phone').value;
+			var applicantResume = document.getElementById('resume').value;
+
+			if(applicantResume !='' && applicantName != '' && applicantEmail != '' && applicantPhone!= '') {   
+				const fileSize = document.getElementById('resume').files[0].size;
+				const roundedFileSize = Math.round((fileSize / 1024));
+
+				if (roundedFileSize >= 4096) {
+					console.log("greater than 4mb");
+					// document.getElementById('toastDiv2').innerHTML=`
+					// <div id="toast-warning" class="flex items-center w-full max-w-xs p-4 text-gray-500 bg-red rounded-lg shadow dark:text-gray-400 dark:bg-gray-800" role="alert">
+					//   <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-orange-500 bg-orange-100 rounded-lg dark:bg-orange-700 dark:text-orange-200">
+					//       <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
+					//   </div>
+					//   <div class="ml-3 text-sm font-normal">Improve password difficulty.</div>
+					//   <button type="button" class="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700" data-collapse-toggle="toast-warning" aria-label="Close">
+					//       <span class="sr-only">Close</span>
+					//       <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+					//   </button>
+					// </div>`
+				} 
+				// else if (roundedFileSize < 2048) {
+				// 	console.log("less than 2mb");
+				// 	document.getElementById('toastDiv1').innerHTML=`
+				// 	<div id="toast-warning" class="flex items-center w-full max-w-xs p-4 text-gray-500 bg-red rounded-lg shadow dark:text-gray-400 dark:bg-gray-800" role="alert">
+				// 	  <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-orange-500 bg-orange-100 rounded-lg dark:bg-orange-700 dark:text-orange-200">
+				// 	      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
+				// 	  </div>
+				// 	  <div class="ml-3 text-sm font-normal">Improve password difficulty.</div>
+				// 	  <button type="button" class="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700" data-collapse-toggle="toast-warning" aria-label="Close">
+				// 	      <span class="sr-only">Close</span>
+				// 	      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+				// 	  </button>
+				// 	</div>`
+				// }
+				else {
+					console.log("File Size : "+roundedFileSize);
+					run(this, applicantName);
+					postToGoogle(this, applicantName, applicantEmail, applicantPhone);
+					return false;
+				}
+			} 
+			else {
+				Swal.fire(
+					'Incomplete Form!',
+					'Please fill the form completely and try again!',
+					'error'
+				)
+				return false; 
+			}
+		});
+	</script>
+
+	<!-- FILE UPLOAD -->
+	<script>
+		async function run(e,name) {
+			var jobIdparam = document.getElementById('applyBtn').value;
+			var resumeFilename = name + "_" + jobIdparam;
+			const url = "https://script.google.com/macros/s/AKfycbzRWf2GX_Dt0ZksYRcBYhJfKKMKcUwp51K35kgFdTqByAzpLqkCQyT5Nf06rgkzsYiSYw/exec";
+			const obj = await ParseFormObjectForGAS(e.parentNode.parentNode, null, null, true);
+			obj.resume[0].files[0].filename = resumeFilename;
+			fetch(url, { method: "POST", body: JSON.stringify({ 'a': obj, 'b': jobIdparam}) })
+					.then((res) => res.json())
+					.then((res) =>
+						Toastify({
+							text: "Hello "+res.applicantNameToast+  ",  Your Applicant ID is " + res.applicantJobRefId,
+							duration: -1,
+							destination: `index.html?id=${res.applicantJobRefId}`,
+							newWindow: true,
+							close: true,
+							gravity: "bottom", // `top` or `bottom`
+							position: "right", // `left`, `center` or `right`
+							stopOnFocus: true, // Prevents dismissing of toast on hover
+							style: {
+									background: "linear-gradient(to right, #00b09b, #96c93d)",
+							},
+							offset: {
+									x: 50, // horizontal axis - can be a number or a string indicating unity. eg: '2em'
+									y: 20 // vertical axis - can be a number or a string indicating unity. eg: '2em'
+							},
+						})
+						.showToast()
+					);
+		}
+	</script>
+
+	<!-- POST TO GOOGLE -->
+	<script>
+		function postToGoogle(e, name, email, phone) {
+				var field1 = name;
+				var field2 = email;
+				var field3 = document.getElementById('applyBtn').value;
+				var field4 = phone;
+
+				$.ajax({
+					url: "https://docs.google.com/forms/u/3/d/e/1FAIpQLSfzYmaJ6VC0MlGZF5mas6UFgJFbrCqh01c8gstmEAQhrif7Qw/formResponse",
+
+					//add your google form generated numbers below which are also the 'names' of your inputs     
+					data: {
+						"entry.467876062": field1,
+						"entry.362738034": field2,
+						"entry.284597317": field3,
+						"entry.961587284": field4,
+					},
+					type: "POST",
+					dataType: "xml",
+					success: function (d) {
+						document.getElementById('applyForm').reset();
+					},
+					error: function (x, y, z) {
+						Swal.fire({
+							icon:'success',
+							title: 'Applied Successfully!',
+							text: 'You will receive a confirmation mail along with a Unique Reference Id after our system reviews your application.',
+							confirmButtonText: 'OK',
+						})
+						document.getElementById('applyForm').reset();
+					}
+				});
+				return false;
+		}
+	</script>
+
+
+	<script src="js/jobDetails.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
 
 </body>
