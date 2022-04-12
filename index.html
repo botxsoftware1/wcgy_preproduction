@@ -134,8 +134,8 @@
   <!-- PAGINATION CONTROLS -->
   <div id="paginationControl">
     <div class="flex justify-center">
-      <button id="btn-prev">&elsdot; Previous</button>
-      <button id="btn-next">Next &egsdot;</button>
+      <button id="btn-prev" onclick="scrollUp(this)">&elsdot; Previous</button>
+      <button id="btn-next" onclick="scrollUp(this)">Next &egsdot;</button>
     </div>
     <p class="flex justify-center">Page<span id="page"></span></p>
   </div>
@@ -147,7 +147,14 @@
 
 
 
-<!--------------------- SCRIPTS ---------------------------->
+<!--------------------------------------------------------- SCRIPTS ------------------------------------------------------------------->
+
+<!-- AUTO SCROLL UP ON PAGINATION -->
+<script>
+  function scrollUp(btn) {
+    scroll({top: 525, behavior: 'smooth'} );
+  }
+</script>
 
 <!-- FORM ONSUBMIT CLICK -->
 <script>

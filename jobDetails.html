@@ -23,13 +23,11 @@
 <body>
 
 	<link rel="stylesheet" href="https://cdn.tailgrids.com/tailgrids-fallback.css" />
+	<script src="https://cdn.lordicon.com/lusqsztk.js"></script>
+	
 
 	<!-- ====== Navbar Section Start -->
-	<header x-data="
-			{
-				navbarOpen: false,
-			}
-		" class="absolute z-50 w-full">
+	<header x-data=" { navbarOpen: false, } " class="absolute z-50 w-full">
 			<div class="container">
 					<div class="flex  items-center justify-start float-start relative">
 							<div class="px-4 w-120 max-w-full">
@@ -84,7 +82,7 @@
 							">
 													<ul class="block lg:flex">
 															<li>
-																	<a href="javascript:void(0)" class="
+																	<a href="http://localhost:5500/index.html" class="
 											text-base
 											font-medium
 											text-dark
@@ -98,7 +96,7 @@
 																	</a>
 															</li>
 															<li>
-																	<a href="javascript:void(0)" class="
+																	<a href="http://localhost:5500/allJobs.html" class="
 											text-base
 											font-medium
 											text-dark
@@ -267,12 +265,12 @@
 						</div>
 						<ul class="flex flex-wrap items-center">
 							<li>
-								<a href="javascript:void(0)" class=" py-4 px-6 sm:px-10 lg:px-8 xl:px-10 inline-flex items-center justify-center text-center text-white text-base bg-primary hover:bg-opacity-90 font-normal rounded-lg ">
+								<a id="applyRefOne" onclick="formHighlight(this)" style="cursor: pointer;" class="py-4 px-6 sm:px-10 lg:px-8 xl:px-10 inline-flex items-center justify-center text-center text-white text-base bg-primary hover:bg-opacity-90 font-normal rounded-lg">
 									Apply Now
 								</a>
 							</li>
 							<li>
-								<a id="companyPage" href="http://127.0.0.1:5500/wcgy_preprod/employerPage.html?companyId=" class=" py-4 px-6 sm:px-10 lg:px-8 xl:px-10 inline-flex items-center justify-center text-center text-base font-normal text-body-color hover:text-primary ">
+								<a id="companyPage" href="http://127.0.0.1:5500/employerPage.html?companyId=" class=" py-4 px-6 sm:px-10 lg:px-8 xl:px-10 inline-flex items-center justify-center text-center text-base font-normal text-body-color hover:text-primary ">
 									<span class="mr-2 items-center">
 										<svg class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24"
 											stroke="currentColor">
@@ -382,7 +380,7 @@
 				
 				<!-- APPLY FORM, RIGHT CIRCLE AND DOTS -->
 				<div class="w-full lg:w-1/2 xl:w-5/12 px-4 z-10">
-					<div class="bg-white relative rounded-lg p-8 sm:p-12 shadow py-12 px-8 hover:shadow-2xl delay-75 duration-100 ">
+					<div id="formContainer" class="bg-white relative rounded-lg p-8 sm:p-12 shadow py-12 px-8 hover:shadow-2xl delay-75 duration-100">
 						
 						<!-- JOB APPLY FORM -->
 						<form id="applyForm" class="z-20" autocomplete="off">
@@ -400,9 +398,9 @@
 							</div>
 							<!-- RESUME -->
 							<div>
-								<div id="resumeBox" class="mb-6 mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+								<div id="resumeBox" class="mb-6 mt-1 flex justify-center px-6 pt-5 pb-6 border-2 rounded-md">
 									<div class="space-y-1 text-center">
-										<svg class="h-12 w-12 text-gray-300 mx-auto" width="24" height="24"
+										<svg id="defaultSvg" class="h-12 w-12 text-gray-300 mx-auto" width="24" height="24"
 											viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
 											stroke-linecap="round" stroke-linejoin="round">
 											<path stroke="none" d="M0 0h24v24H0z" />
@@ -412,14 +410,20 @@
 											<line x1="9" y1="13" x2="15" y2="13" />
 											<line x1="13" y1="17" x2="15" y2="17" />
 										</svg>
+										<svg id="uploadedSvg" class="h-12 w-12 text-green-500 mx-auto" style="display: none;" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  
+											<path stroke="none" d="M0 0h24v24H0z"/>  
+											<path d="M14 3v4a1 1 0 0 0 1 1h4"/>  
+											<path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z"/>  
+											<path d="M9 15l2 2l4 -4"/>
+										</svg>
 										<div class="flex text-sm text-gray-600">
-											<label for="resume" class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
+											<label for="resume" class="resumeBoxText relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
 												<span class="resumeBoxText">Upload Resume</span>
 												<input id="resume" name="resume" type="file" tabindex="4" class="sr-only" multiple>
 											</label>
-											<p class="resumeBoxText pl-1">or drag and drop</p>
+											<p id="dropAreaText" class="pl-1">or drag and drop</p>
 										</div>
-										<p class="text-xs text-gray-500">
+										<p class="resumeBoxText text-xs text-gray-500">
 											a PDF up to 250KB
 										</p>
 									</div>
@@ -626,7 +630,7 @@
 						When applying for jobs, you should NEVER have to pay to apply. You should also NEVER have to pay to buy equipment which they then pay you back for later. Also never pay for trainings you have to do. Those are scams! NEVER PAY FOR ANYTHING! Posts that link to pages with "how to work online" are also scams. Don't use them or pay for them. Also always verify you're actually talking to the company in the job post and not an imposter. A good idea is to check the domain name for the site/email and see if it's the actual company's main domain name. Scams in remote work are rampant, be careful! Read more to avoid scams. When clicking on the button to apply above, you will leave Remote OK and go to the job application page for that company outside this site. Remote OK accepts no liability or responsibility as a consequence of any reliance upon information on there (external sites) or here.
 					</p>
 				</div>
-				<a href="https://remoteok.com/remote-jobs/109829-remote-backend-software-engineer-practicegenius" class=" w-full block text-base font-semibold text-primary bg-transparent border border-[#D4DEFF] rounded-md text-center p-4 hover:text-white hover:bg-primary hover:border-primary transition ">
+				<a id="applyRefTwo" onclick="formHighlight(this)" style="cursor: pointer;" class="w-full block text-base font-semibold text-primary bg-transparent border border-[#D4DEFF] rounded-md text-center p-4 hover:text-white hover:bg-primary hover:border-primary transition ">
 					Apply for this Job
 				</a>
 				<div>
@@ -717,35 +721,106 @@
 
 
 
-	<!-- SCRIPTS -->
-	
+	<!------------------------------------------------------- SCRIPTS -------------------------------------------------------------------->
+
+
+	<!-- HIGHLIGHT JOB APPLY FORM -->
+	<script>
+		function formHighlight(btn) {
+			formContainer = document.getElementById('formContainer')
+			scroll({top: 85, behavior: 'smooth'} );
+			formContainer.classList.remove("shadow", "shadow-2xl", "delay-75", "duration-100");
+
+			if(btn.id == "applyRefOne") {
+				setTimeout(() => {
+					formContainer.classList.add("shadow-2xl", "delay-75", "duration-100");
+				},250)
+			}
+			else {
+				setTimeout(() => {
+					document.getElementById('formContainer').classList.add("shadow-2xl", "delay-75", "duration-100");
+				},1000)
+			}
+		}
+	</script>
+
 
 	<!-- DRAG AND DROP -->
 	<script>
-		document.getElementById('resumeBox').addEventListener("dragenter", function(e) {
-			e.preventDefault();
-			console.log(e);
-			document.getElementById('resumeBox').classList.remove("border-dashed","border-gray-300");
+		resumeInput = document.getElementById('resume');
+		resumeBox = document.getElementById('resumeBox');
+		resumeBoxText = document.getElementsByClassName('resumeBoxText')
+		dropAreaText = document.getElementById('dropAreaText');
+		defaultSvg = document.getElementById('defaultSvg');
+		uploadedSvg = document.getElementById('uploadedSvg');
+
+
+		// HANDLING DRAG EVENTS UPON ENTERING AND HOVERING OVER THE RESUME UPLOAD BOX
+		["dragenter", "dragover"].forEach( event => {
+			resumeBox.addEventListener(event, function(e) {
+				e.preventDefault();
+				e.dataTransfer.effectAllowed = "copy";
+				e.dataTransfer.dropEffect = "copy";
+				console.log(resumeInput.files);
+				for (text of resumeBoxText) {
+					text.style.display = "none";
+				}
+				if(resumeInput.files.length == 0) {
+					dropAreaText.innerHTML = "Drop to upload resume";
+				}
+				else {
+					defaultSvg.style.display = "block";
+					uploadedSvg.style.display = "none";
+					dropAreaText.innerHTML = "Drop to replace existing file";
+				}
+				resumeBox.classList.add("border-dashed","border-green-600");
+			});
 		});
 
-		document.getElementById('resumeBox').addEventListener("dragover", function(e) {
-			e.preventDefault();
-			console.log("hi");
-			document.getElementById('resumeBox').classList.remove("border-dashed","border-gray-300");
+
+		// HANDLING DRAG EVENT UPON LEAVING THE RESUME UPLOAD BOX 
+		resumeBox.addEventListener("dragleave", function(e) {
+			if(resumeInput.files.length == 0) {
+				for (text of resumeBoxText) {
+					text.style.display = "block";
+				}
+				dropAreaText.innerHTML = "or drag and drop";
+			}
+			else {
+				dropAreaText.innerHTML = "Resume Uploaded";
+				defaultSvg.style.display = "none";
+				uploadedSvg.style.display = "block";
+			}
+			resumeBox.classList.remove("border-dashed","border-green-600");
 		});
 
-		document.getElementById('resumeBox').addEventListener("dragleave", function(e) {
-			console.log("bye");
-			document.getElementById('resumeBox').classList.add("border-dashed","border-gray-300");
+
+		// HANDLING FILE DROP EVENT IN THE RESUME UPLOAD BOX
+		resumeBox.addEventListener("drop", function(e) {
+			e.preventDefault();
+			resumeInput.files = e.dataTransfer.files;
+			dropAreaText.innerHTML = "Resume Uploaded";
+			resumeBox.classList.remove("border-dashed");
+			resumeBox.classList.add("border-green-300");
+			defaultSvg.style.display = "none";
+			uploadedSvg.style.display = "block";
 		});
 
-		document.getElementById('resumeBox').addEventListener("drop", function(e) {
-			e.preventDefault();
-			console.log("bye");
-			document.getElementById('resumeBox').classList.add("border-dashed","border-gray-300");
 
+		// EVENT HANDLING IN CASE THE USER UPLOADS RESUME THROUGH THE 'Upload Resume' BUTTON
+		resumeInput.addEventListener("change", function(e) {
+			if(resumeInput.files.length != 0) {
+				for (text of resumeBoxText) {
+					text.style.display = "none";
+				}
+				dropAreaText.innerHTML = "Resume Uploaded";
+				resumeBox.classList.add("border-green-300");
+				defaultSvg.style.display = "none";
+				uploadedSvg.style.display = "block";
+			}
 		});
 	</script>
+
 
 	<!-- FORM ONSUBMIT CLICK -->
 	<script>
@@ -756,12 +831,14 @@
 			var applicantPhone = document.getElementById('phone').value;
 			var applicantResume = document.getElementById('resume').value;
 
+			// VALIDATING INPUTS
 			if(applicantResume !='' && applicantName != '' && applicantEmail != '' && applicantPhone!= '') {   
 				const fileSize = document.getElementById('resume').files[0].size;
 				const roundedFileSize = Math.round((fileSize / 1024));
 
-				if (roundedFileSize >= 4096) {
-					console.log("greater than 4mb");
+				// CHECKING INPUT FILE SIZE
+				if (roundedFileSize >= 300) {
+					console.log("greater than 1 MB");
 					// document.getElementById('toastDiv2').innerHTML=`
 					// <div id="toast-warning" class="flex items-center w-full max-w-xs p-4 text-gray-500 bg-red rounded-lg shadow dark:text-gray-400 dark:bg-gray-800" role="alert">
 					//   <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-orange-500 bg-orange-100 rounded-lg dark:bg-orange-700 dark:text-orange-200">
@@ -774,8 +851,8 @@
 					//   </button>
 					// </div>`
 				} 
-				// else if (roundedFileSize < 2048) {
-				// 	console.log("less than 2mb");
+				// else if (roundedFileSize < 200) {
+				// 	console.log("less than 200 KB");
 				// 	document.getElementById('toastDiv1').innerHTML=`
 				// 	<div id="toast-warning" class="flex items-center w-full max-w-xs p-4 text-gray-500 bg-red rounded-lg shadow dark:text-gray-400 dark:bg-gray-800" role="alert">
 				// 	  <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-orange-500 bg-orange-100 rounded-lg dark:bg-orange-700 dark:text-orange-200">
@@ -805,6 +882,7 @@
 			}
 		});
 	</script>
+
 
 	<!-- FILE UPLOAD -->
 	<script>
@@ -839,6 +917,7 @@
 		}
 	</script>
 
+
 	<!-- POST TO GOOGLE -->
 	<script>
 		function postToGoogle(e, name, email, phone) {
@@ -846,6 +925,11 @@
 				var field2 = email;
 				var field3 = document.getElementById('applyBtn').value;
 				var field4 = phone;
+				resumeBox = document.getElementById('resumeBox');
+				resumeBoxText = document.getElementsByClassName('resumeBoxText')
+				dropAreaText = document.getElementById('dropAreaText');
+				defaultSvg = document.getElementById('defaultSvg');
+				uploadedSvg = document.getElementById('uploadedSvg');
 
 				$.ajax({
 					url: "https://docs.google.com/forms/u/3/d/e/1FAIpQLSfzYmaJ6VC0MlGZF5mas6UFgJFbrCqh01c8gstmEAQhrif7Qw/formResponse",
@@ -861,6 +945,7 @@
 					dataType: "xml",
 					success: function (d) {
 						document.getElementById('applyForm').reset();
+
 					},
 					error: function (x, y, z) {
 						Swal.fire({
@@ -869,7 +954,18 @@
 							text: 'You will receive a confirmation mail along with a Unique Reference Id after our system reviews your application.',
 							confirmButtonText: 'OK',
 						})
+
+						// RESETTING JOB APPLY FORM  
 						document.getElementById('applyForm').reset();
+						for (text of resumeBoxText) {
+								text.style.display = "block";
+							}
+						dropAreaText.innerHTML = "or drag and drop";	
+						resumeBox.classList.remove("border-green-300", "border-green-600");
+						defaultSvg.style.display = "block";
+						uploadedSvg.style.display = "none";
+						// END RESETTING JOB APPLY FORM  
+
 					}
 				});
 				return false;

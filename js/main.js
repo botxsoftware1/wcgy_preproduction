@@ -1,4 +1,6 @@
+
 var jobsData = [];
+
 
 
 // FETCH JSON
@@ -16,6 +18,7 @@ var jobsData = (function () {
   return json["user"];
 })(); 
 // END FETCH JSON
+
 
 
 // START PAGINATION
@@ -65,7 +68,7 @@ function jsp_change_page(page, jsp_json_object = jobsData) {
 					<div class="bg-white border border-white shadow-lg rounded-xl pb-3 my-1 mr-1" style="position: relative; display: block;">
 						<button class="shareTooltip" onclick="shareButton(this)" onmouseout="afterClickShare(this)" style="position: absolute; top: 2px; right: 5px;">
 							<span id="shareTooltip" class="tooltiptext">Copy Link</span>
-							<span id="shareLink" style="display:none;">jobCompDetails.html?=${jsp_json_object[i].jobId}</span>
+							<span id="shareLink" style="display:none;">http://localhost:5500/jobDetails.html?jobId=${jsp_json_object[i].jobId}</span>
 							<svg class="h-5 w-5" viewBox="0 0 72 72" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 								<g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
 									<g id="Social-Icons---Rounded" transform="translate(-40.000000, -379.000000)">
@@ -79,7 +82,9 @@ function jsp_change_page(page, jsp_json_object = jobsData) {
 						</button>
 						<div class="flex sm:flex"> 
 							<div class=" relative h-32 w-32 sm:mb-0 ml-3 mb-20 mt-3 justify-center justify-items-center">
-								<img src="${jsp_json_object[i].photo}" alt="pranav" class="w-32 h-32 shadow-lg outline-2 rounded-2xl"> 
+								<a href="http://localhost:5500/jobDetails.html?jobId=${jsp_json_object[i].jobId}" target="_blank">
+									<img src="${jsp_json_object[i].photo}" alt="pranav" class="w-32 h-32 shadow-lg outline-2 rounded-2xl">
+								</a>
 								<div class="w-full pt-1 mb-8 z-5 justify-center text-ellipsis overflow-hidden flex-auto inline-flex fixed-top-right float-right  object-right-top">
 									<span class="badge badge-sm">Job ID: ${jsp_json_object[i].jobId}</span>
 								</div>
@@ -88,10 +93,12 @@ function jsp_change_page(page, jsp_json_object = jobsData) {
 								<div class="flex items-center justify-between sm:mt-2">
 									<div class="flex items-center">
 										<div class="flex flex-col">
-											<div class="w-full z-30 text-ellipsis overflow-hidden flex-auto inline-flex text-lg text-gray-800 font-bold leading-none">${jsp_json_object[i].name}</div>
-												<div class="flex-auto text-gray-500 my-1">
-													<span class="mr-3 bg-gray ">${jsp_json_object[i].company}</span>
-												</div>
+											<a href="http://localhost:5500/jobDetails.html?jobId=${jsp_json_object[i].jobId}" target="_blank">	
+												<div class="w-full z-30 text-ellipsis overflow-hidden flex-auto inline-flex text-lg text-gray-800 font-bold leading-none">${jsp_json_object[i].name}</div>
+											</a>
+											<div class="flex-auto text-gray-500 my-1">
+												<span class="mr-3 bg-gray ">${jsp_json_object[i].company}</span>
+											</div>
 											</div>
 										</div>
 									</div>

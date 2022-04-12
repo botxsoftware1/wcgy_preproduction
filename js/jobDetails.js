@@ -8,7 +8,7 @@ window.onload = () => {
 	currentUrl = new URLSearchParams(window.location.search);
 	jobId = currentUrl.get('jobId');
 	$.ajax({
-		url: "https://script.google.com/macros/s/AKfycbz8L5g9hCako9EN07uWk9Gq0Lq3NRcl6nUctJq2svq0MJPy18u4aEir8csVv4s0n867/exec",
+		url: "https://script.google.com/macros/s/AKfycbxjRgnEhyoorocLfqfRVlhYOv_M_aN2npHqUQBUmFB5iZHoQNTF8lKidEw6rp0QNE-6/exec",
 		type: "GET",
 		data: { 
 			jobId: jobId,
@@ -23,6 +23,7 @@ window.onload = () => {
 					document.getElementById('featuredTag').style.visibility = "visible";
 				}
 				
+				
 				// HERO SECTION
 				document.getElementById('jobName').innerHTML = jobDetails.name;
 				document.getElementById('companyName').innerHTML += jobDetails.companyName;
@@ -30,6 +31,7 @@ window.onload = () => {
 				document.getElementById('applyBy').innerHTML += jobDetails.applyBy;
 				document.getElementById('location').innerHTML += jobDetails.location;
 				document.getElementById('jobBrief').innerHTML = jobDetails.brief;
+
 
 				// JOB DETAILS SECTION
 				document.getElementById('salary').innerHTML += jobDetails.salary + "/- Per Annum.";
@@ -48,8 +50,8 @@ window.onload = () => {
 				document.getElementById('roleAndResponsibility').innerHTML = jobDetails.roleAndResponsibility;
 				document.getElementById('benefits').innerHTML = jobDetails.benefits;
 
-				// SKILLTAGS 
 
+				// SKILLTAG GENERATION
 				for (i=0; i<jobDetails.skillTags.length; i++) {
 					var colourOfBadgeandText=colors[Math.random()*colors.length|0];
 					document.getElementById('skillTags').innerHTML += `

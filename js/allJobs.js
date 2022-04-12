@@ -4,6 +4,9 @@ $(function(){
 	var page = 1,
 		  pagelimit = 10,
 		  totalrecord = 0;
+	var jobType = [],
+			jobLocation = [],
+			jobSkill = [];
 
 	fetchData();
 
@@ -36,29 +39,84 @@ $(function(){
 	// FILTER BASED ON TAGS
 	$('.filterTags').on("click", function(e) {
 		searchValue = e.target.value;
-		fetchData(searchValue, true);
+		fetchData(searchValue, true, false);
 	});
 	// END FILTER BASED ON TAGS
 
+	// SIDEBAR FILTER
+	$('.sidebar-filter').on("click", function(e) {
+		var jobFilter = [];
 
-	function fetchData(searchValue = "", searchTag = false) {
+		// IF THE CLICKED CHECKBOX IS CHECKED, ADD CHECKBOX VALUE TO RESPECTIVE ARRAY
+		if (e.target.checked) {
+			if (e.target.name == "jobType") {
+				jobType.push(e.target.value);
+			}
+			else if (e.target.name == "jobLocation") {
+				jobLocation.push(e.target.value);
+			}
+			else {
+				jobSkill.push(e.target.value);
+			}
+		}
+
+		// IF THE CLICKED CHECKBOX IS UNCHECKED, REMOVE CHECKBOX VALUE FROM RESPECTIVE ARRAY
+		else {
+			if (e.target.name == "jobType") {
+				jobType = jobType.filter(removeFromFilter);
+			}
+			else if (e.target.name == "jobLocation") {
+				jobLocation = jobLocation.filter(removeFromFilter);
+			}
+			else {
+				jobSkill = jobSkill.filter(removeFromFilter);
+			}
+
+			// FILTER FUNCTION TO REMOVE AN ELEMENT FROM ARRAY 
+			function removeFromFilter(element) {
+				return element != e.target.value;
+			}
+
+		}
+		
+		// COMBINING ALL THREE CATEGORY ARRAYS TO FORM A SINGLE 2D ARRAY TBEFORE SENDING TO BACKEND
+		jobFilter.push(jobType,jobLocation,jobSkill);
+
+		// SENDING CATEGORY FILTER ARRAY TO BACKEND IF ATLEAST ONE CHECKBOX IS CHECKED
+		if (jobFilter[0].length != 0 || jobFilter[1].length != 0 || jobFilter[2].length != 0) {
+			fetchData(jobFilter, false, true);
+		}
+
+		// IF ALL CHECKBOXES ARE UNCHECKED, FETCH DATA NORMALLY FORM BACKEND
+		else {
+			fetchData();
+		}
+
+	});
+	// END SIDEBAR FILTER
+
+
+	function fetchData(searchValue = "", tagSearch = false, categoryFilter = false) {
+		
 	  // ajax() method to make api calls
 	  $.ajax({
-		url: "https://script.google.com/macros/s/AKfycbx7z_WlKC-OFYUA3eeP5xVDEGWRFW8PyLVFINJAhjpGdTRewXd_kQZSV4h7KD1gupF8/exec",
+		url: "https://script.google.com/macros/s/AKfycbz1rNLBG2jBj1RP-BI_qhdJQq1TbyjlhkRlhIKs1b96zrOTtGpOkjl_NIS8NJyaMpLW/exec",
 		type: "GET",
 		data: { 
 				page: page,
 				limit: pagelimit,
-				search: searchValue,
-				searchByTag: searchTag
+				search: JSON.stringify(searchValue),
+				searchByTag: tagSearch,
+				filterByCategory: categoryFilter
 		},
 		success: function(data) {
-		  console.log(data);
+			console.log(data);
+		  if (data.jobs) {
+				var dataArr = data.jobs;
+				totalrecord = data.rowCount;
+				// console.log("lastrow : ",data.lastRow);
 
-		  if (data.user) {
-				var dataArr = data.user;
-				totalrecord = data.totalrecords;
-				// console.log("b : ",data.b);
+				document.getElementById('jobCountTitle').innerHTML = `Found ${totalrecord} jobs for you!`;
 
 				function jobTemplate(job) {
 					return `
@@ -73,7 +131,7 @@ $(function(){
 									<div x-data="{ tooltip: false }" class="relative z-30 inline-flex">
 										<div x-on:mouseover="tooltip = true" x-on:mouseleave="tooltip = false">
 											<button onclick="shareButton(this)" onmouseout="afterClickShare(this)" class="border border-black flex items-center bg-black justify-center p-2 rounded-xl">
-												<span id="shareLink" style="display:none;">jobCompDetails.html?=${job.jobId}</span>
+												<span id="shareLink" style="display:none;">http://localhost:5500/jobDetails.html?jobId=${job.jobId}</span>
 												<svg class="h-5 w-5" viewBox="0 0 72 72" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 													<g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
 													<g id="Social-Icons---Rounded" transform="translate(-40.000000, -379.000000)">
@@ -100,17 +158,18 @@ $(function(){
 								</div>
 							</div>
 							<div>
-								<p class="">${job.company}</p>	
+								<a href="http://localhost:5500/employerPage.html?companyId=${job.companyId}" target="_blank">${job.company}</a>	
 							</div>
 							<div>
-								<p class="text-2xl">${job.name}</p>
+							<a href="http://localhost:5500/jobDetails.html?jobId=${job.jobId}" target="_blank">
+									<p class="text-2xl">${job.name}</p>
+								</a>
 								<p class="truncate">Job ID : ${job.jobId}</p>
 							</div>
 							<div class="gap-2 flex pb-3">
-								<a href="#" class="py-1 px-4 text-sm bg-gray-900 text-white rounded-md">${job.kind}</a>
-								<a href="#" class="py-1 px-4 text-sm bg-gray-900 text-white rounded-md">${job.type}</a>
-								<a href="#" class="py-1 px-4 text-sm bg-gray-900 text-white rounded-md">${job.tags}</a>
-								<a href="http://localhost:5500/wcgy_preprod/employerPage.html?cid=${job.jobId}" class="py-1 px-4 text-sm bg-gray-900 text-white rounded-md">${job.jobId}</a>
+								<button style="cursor: default;" class="py-1 px-4 text-sm bg-gray-900 text-white rounded-md">${job.kind}</button>
+								<button style="cursor: default;" class="py-1 px-4 text-sm bg-gray-900 text-white rounded-md">${job.type}</button>
+								<button style="cursor: default;" class="py-1 px-4 text-sm bg-gray-900 text-white rounded-md">${job.tags}</button>
 							</div>
 						</div>
 					`;
